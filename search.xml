@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>测试1</title>
-    <url>/2017/10/13/test1/</url>
-    <content><![CDATA[<h3 id="这是测试模块1"><a href="#这是测试模块1" class="headerlink" title="这是测试模块1"></a>这是测试模块1</h3>]]></content>
-      <categories>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>测试</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>typescript学习笔记</title>
     <url>/2020/04/08/ts1/</url>
     <content><![CDATA[<h2 id="js-的原生类型"><a href="#js-的原生类型" class="headerlink" title="js 的原生类型"></a>js 的原生类型</h2><ol>
@@ -127,6 +116,17 @@
       </categories>
       <tags>
         <tag>ts</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>测试1</title>
+    <url>/2017/10/13/test1/</url>
+    <content><![CDATA[<h3 id="这是测试模块1"><a href="#这是测试模块1" class="headerlink" title="这是测试模块1"></a>这是测试模块1</h3>]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>测试</tag>
       </tags>
   </entry>
   <entry>
