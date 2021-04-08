@@ -1,50 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2021/04/06/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>测试1</title>
     <url>/2017/10/13/test1/</url>
     <content><![CDATA[<h3 id="这是测试模块1"><a href="#这是测试模块1" class="headerlink" title="这是测试模块1"></a>这是测试模块1</h3>]]></content>
       <categories>
-        <category>面试题</category>
+        <category>测试</category>
       </categories>
       <tags>
-        <tag>css</tag>
-        <tag>js</tag>
+        <tag>测试</tag>
       </tags>
   </entry>
   <entry>
-    <title>测试2</title>
-    <url>/2017/10/12/test2/</url>
-    <content><![CDATA[<h3 id="这是测试模块2"><a href="#这是测试模块2" class="headerlink" title="这是测试模块2"></a>这是测试模块2</h3><h3 id="嘻嘻"><a href="#嘻嘻" class="headerlink" title="嘻嘻"></a>嘻嘻</h3>]]></content>
+    <title>typescript学习笔记</title>
+    <url>/2020/04/08/ts1/</url>
+    <content><![CDATA[<h2 id="js-的原生类型"><a href="#js-的原生类型" class="headerlink" title="js 的原生类型"></a>js 的原生类型</h2><ol>
+<li>基本数据类型<ol>
+<li>string number undefined null boolean</li>
+</ol>
+</li>
+<li>复杂【引用】数据类型<ol>
+<li>object</li>
+</ol>
+</li>
+<li>缺点： 弱类型     数据类型可以更改    安全性低   </li>
+</ol>
+<h2 id="ts-类型系统-强类型-数据类型是定死的-安全性更高"><a href="#ts-类型系统-强类型-数据类型是定死的-安全性更高" class="headerlink" title="ts 类型系统   强类型   数据类型是定死的   安全性更高"></a>ts 类型系统   强类型   数据类型是定死的   安全性更高</h2><blockquote>
+<p>编译代码时即可以发现错误</p>
+</blockquote>
+<ol>
+<li>基本数据类型<ol>
+<li>string number undefined null boolean</li>
+</ol>
+</li>
+<li>复杂【引用】数据类型<ol>
+<li>object</li>
+</ol>
+</li>
+<li>其他数据类型<ol>
+<li>内置对象类型</li>
+<li>元组  </li>
+<li>枚举</li>
+<li>接口</li>
+<li>。。。</li>
+</ol>
+</li>
+</ol>
+<h2 id="为什么要提供类型系统？-为什么现在要用ts"><a href="#为什么要提供类型系统？-为什么现在要用ts" class="headerlink" title="为什么要提供类型系统？ 为什么现在要用ts"></a>为什么要提供类型系统？ 为什么现在要用ts</h2><ol>
+<li>ts是强类型，安全度更高</li>
+<li>ts编译既可以发现错误，可以减少debug时间  </li>
+<li>提供更多的代码提示</li>
+</ol>
+<h2 id="ts缺点"><a href="#ts缺点" class="headerlink" title="ts缺点"></a>ts缺点</h2><p>代码量增加了 </p>
+<h2 id="第一个ts案例"><a href="#第一个ts案例" class="headerlink" title="第一个ts案例"></a>第一个ts案例</h2><ol>
+<li>ts不能直接在浏览器使用，需要编译成js</li>
+<li>tsc在编译时，还会将高版本的es语法转成es5</li>
+</ol>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p>let/const 变量名:数据类型 = 值</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// number</span></span><br><span class="line"><span class="keyword">let</span> m: <span class="built_in">number</span> = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// string</span></span><br><span class="line"><span class="keyword">let</span> s: <span class="built_in">string</span> = <span class="string">&#x27;Hello ts&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// boolean</span></span><br><span class="line"><span class="keyword">let</span> b: <span class="built_in">boolean</span> = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// undefined </span></span><br><span class="line"><span class="keyword">let</span> und: <span class="literal">undefined</span> = <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// null </span></span><br><span class="line"><span class="keyword">let</span> nul: <span class="literal">null</span> = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<p>ts给了简写：类型推论(根据值来根据值来定义变量的数据类型)</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> n = <span class="number">1000</span>; <span class="comment">// 1000是numble，所以推论n的类型是numble类型</span></span><br><span class="line">n = <span class="string">&#x27;string&#x27;</span>; <span class="comment">// 就会报错</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="对象类型"><a href="#对象类型" class="headerlink" title="对象类型"></a>对象类型</h3><p>在 TypeScript 中，我们使用接口（Interfaces）来定义对象的类型。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见的对象</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">   id: <span class="number">1</span>,</span><br><span class="line">   name: <span class="string">&#x27;zhangsan&#x27;</span>,</span><br><span class="line">   age: <span class="number">18</span>,</span><br><span class="line">   sex: <span class="string">&#x27;nan&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 对象类型</span></span><br><span class="line"><span class="keyword">const</span> obj: ObjType = &#123; <span class="comment">// obj后面跟接口名</span></span><br><span class="line">   id: <span class="number">1</span>,</span><br><span class="line">   name: <span class="string">&#x27;zhangsan&#x27;</span>,</span><br><span class="line">   age: <span class="number">18</span>,</span><br><span class="line">   sex: <span class="string">&#x27;nan&#x27;</span>,</span><br><span class="line">   color: <span class="string">&#x27;yellow&#x27;</span> <span class="comment">// 可能有可能没有</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// obj对象可能会增加一些属性</span></span><br><span class="line"><span class="comment">// obj.aa = 1000;</span></span><br><span class="line"><span class="comment">// obj.bb = 1000;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ts 提供两种自定义类型的方式：interface/type</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// interface 接口名称[大驼峰] &#123;&#125;</span></span><br><span class="line"><span class="comment">// 必须和和接口的形状保持一致</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> ObjType &#123;</span><br><span class="line">   <span class="keyword">readonly</span> id: <span class="built_in">number</span>, <span class="comment">// 只读属性</span></span><br><span class="line">   name: <span class="built_in">string</span>,</span><br><span class="line">   age: <span class="built_in">number</span>,</span><br><span class="line">   sex: <span class="built_in">string</span>,</span><br><span class="line">   color?: <span class="built_in">string</span>, <span class="comment">// 可选属性</span></span><br><span class="line">   [propName:<span class="built_in">string</span>]: <span class="built_in">any</span> <span class="comment">// 任意属性 obj对象可增加任何属性，这一行谨慎使用</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者可以采用type 方法类似上面</span></span><br><span class="line"><span class="comment">// type 接口名称[大驼峰] = &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ObjType = &#123;</span><br><span class="line">   <span class="keyword">readonly</span> id: <span class="built_in">number</span>, <span class="comment">// 只读属性</span></span><br><span class="line">   name: <span class="built_in">string</span>,</span><br><span class="line">   age: <span class="built_in">number</span>,</span><br><span class="line">   sex: <span class="built_in">string</span>,</span><br><span class="line">   color?: <span class="built_in">string</span>, <span class="comment">// 可选属性</span></span><br><span class="line">   [propName:<span class="built_in">string</span>]: <span class="built_in">any</span> <span class="comment">// 任意属性 obj对象可增加任何属性，这一行谨慎使用</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>总结: </p>
+<ol>
+<li>赋值的时候，变量的形状必须和接口的形状保持一致。</li>
+<li>可选属性的含义是该属性可以不存在。 ?:</li>
+<li>未定义的属性用任意属性 [propName: string]: any</li>
+<li>只读属性 readonly</li>
+</ol>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>ts定类型：参数和返回值</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 一些常用的函数ts写法</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">a: <span class="built_in">number</span>, b: <span class="built_in">number</span></span>): <span class="title">number</span> </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fn2 = (n: <span class="built_in">string</span>, <span class="attr">m</span>:<span class="built_in">string</span>): <span class="function"><span class="params">string</span> =&gt;</span> &#123;</span><br><span class="line">   <span class="keyword">return</span> n + m;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fn3: <span class="function">(<span class="params">n: <span class="built_in">string</span>, m:<span class="built_in">string</span></span>) =&gt;</span> <span class="built_in">string</span> = <span class="function">(<span class="params">n, m</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="keyword">return</span> n + m;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn4</span>(<span class="params">a: <span class="built_in">string</span>, b: <span class="built_in">boolean</span></span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">   <span class="comment">// void 表示空类型 函数没有返回值</span></span><br><span class="line">   <span class="comment">// a,b做了一些逻辑</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以使用接口定义函数的类型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fn5: FnType = <span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> FnType &#123;</span><br><span class="line">   (a: <span class="built_in">number</span>, <span class="attr">b</span>: <span class="built_in">number</span>): <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// number[]</span></span><br><span class="line"><span class="comment">// 定义了一个元素只能是number类型的数组</span></span><br><span class="line"><span class="keyword">const</span> arr: <span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// string[]</span></span><br><span class="line"><span class="keyword">const</span> arr2: <span class="built_in">string</span>[] = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;v&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 联合类型</span></span><br><span class="line"><span class="keyword">const</span> arr3: (<span class="built_in">number</span> | <span class="built_in">string</span> | <span class="built_in">boolean</span>)[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="literal">true</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// json 类型数组</span></span><br><span class="line"><span class="keyword">const</span> arr4: ArrType[] = [&#123;</span><br><span class="line">   id: <span class="number">1</span>,</span><br><span class="line">   name: <span class="string">&#x27;zhangsan&#x27;</span>,</span><br><span class="line">   age: <span class="number">18</span>,</span><br><span class="line">   sex: <span class="string">&#x27;nan&#x27;</span>,</span><br><span class="line">   color: <span class="string">&#x27;yellow&#x27;</span> <span class="comment">// 可能有可能没有</span></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也是创建一个interface接口 </span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="元组类型"><a href="#元组类型" class="headerlink" title="元组类型"></a>元组类型</h3><p>元组： 是一种规定了数组长度以及每一个元素的数据类型的特殊数组</p>
+<ol>
+<li>定义了一个长度为2的数组</li>
+<li>这个数组中第一个元素是number,第二个是string</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> x: [<span class="built_in">number</span>, <span class="built_in">string</span>];</span><br><span class="line">x = [<span class="number">10</span>, <span class="string">&#x27;hello&#x27;</span>];</span><br></pre></td></tr></table></figure>
+
+<h3 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h3><p>枚举类型：自动添加计数</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="built_in">enum</span> Color &#123; Red = <span class="number">1</span>,Green,Yellow &#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Color.Green); <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(Color.Yellow); <span class="comment">// 3</span></span><br><span class="line"><span class="built_in">console</span>.log(Color[<span class="number">1</span>]); <span class="comment">// Red</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><p>泛型：给未知数据定义类型</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Handler</span>&lt;<span class="title">T</span>&gt; (<span class="params"> a: T </span>):<span class="title">number</span> </span>&#123; <span class="comment">// T在定义时是不确定类型的</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">1000</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Handler(<span class="number">10</span>); <span class="comment">// 调用时我们知道了T是number类型</span></span><br><span class="line">Handler(<span class="string">&#x27;hello&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="class-类"><a href="#class-类" class="headerlink" title="class (类)"></a>class (类)</h3><p>问题： 类中可以写什么? </p>
+<ol>
+<li>实例成员: 实例化类之后得到一个实例，这个实例身上的东西<ol>
+<li>实例属性     [public] count = 1</li>
+<li>实例方法     [public] fn () {}</li>
+</ol>
+</li>
+<li>静态成员   类身上的东西<ol>
+<li>静态属性    static color = ‘red’ </li>
+<li>静态方法    static handler () {}</li>
+</ol>
+</li>
+<li>私有成员   类内部使用的属性和方法<ol>
+<li>私有属性    private msg = ‘hello’ </li>
+<li>私有方法    private func () {}</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 类实现接口【多个】</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="title">implements</span> <span class="title">AppType</span>,<span class="title">HelloType</span> </span>&#123;</span><br><span class="line">  count = <span class="number">1</span></span><br><span class="line">  color = <span class="string">&#x27;yello&#x27;</span></span><br><span class="line">  fn = <span class="function">() =&gt;</span> &#123;&#125;</span><br><span class="line">  username = <span class="string">&#x27;lakers&#x27;</span></span><br><span class="line">  <span class="keyword">static</span> color:<span class="built_in">string</span> = <span class="string">&#x27;red&#x27;</span></span><br><span class="line">  <span class="keyword">static</span> handler (n:<span class="built_in">string</span>,<span class="attr">m</span>:<span class="built_in">string</span>):<span class="built_in">string</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> n + m </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> msg:<span class="built_in">string</span> = <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">  <span class="keyword">private</span> func (n:<span class="built_in">string</span>,<span class="attr">m</span>:<span class="built_in">string</span>):<span class="built_in">string</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> n + m </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> AppType &#123; <span class="comment">//约定了实例成员的类型</span></span><br><span class="line">  count: <span class="built_in">number</span>,</span><br><span class="line">  color: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> HelloType&#123;</span><br><span class="line">  username: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="类型声明"><a href="#类型声明" class="headerlink" title="类型声明"></a>类型声明</h3><p>问题： ts中引入其他js插件，会发生什么</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> $ <span class="keyword">from</span> <span class="string">&#x27;jquery&#x27;</span> <span class="comment">// 问题： 引入时就报错 </span></span><br></pre></td></tr></table></figure>
+<p>$.  js提示代码一个都没有了</p>
+<p>类型声明： xxx.d.ts  类型声明文件</p>
+<p>类型声明文件  @types 社区</p>
+<p>输入以下命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ cnpm i @types/jquery -S</span><br></pre></td></tr></table></figure>
+<p>xxx.d.ts  类型声明文件中</p>
+<p>declare  可以为js来声明类型<br>/// <reference path="legacy.d.ts" />    三斜杠语法  声明文件的引入</p>
+]]></content>
       <categories>
-        <category>面试题</category>
+        <category>typescript</category>
       </categories>
       <tags>
-        <tag>css</tag>
-        <tag>js</tag>
+        <tag>ts</tag>
       </tags>
   </entry>
   <entry>
     <title>web 前端面试总结</title>
-    <url>/2016/10/12/webfrontend/</url>
+    <url>/2021/04/01/webfrontend/</url>
     <content><![CDATA[<h3 id="注册登录是怎么实现的"><a href="#注册登录是怎么实现的" class="headerlink" title="注册登录是怎么实现的"></a>注册登录是怎么实现的</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.登陆注册要做成受控组件，组件定义state，和表单绑定</span><br><span class="line">	</span><br><span class="line">2.redux-saga调用数据请求，发送action修改数据，</span><br><span class="line">  useEffect中dispatch发送数据请求，后端比对用户名是否重复，返回state</span><br><span class="line"></span><br><span class="line">3.前端根据返回的信息成功跳转登陆页</span><br><span class="line"></span><br><span class="line">4.登陆发送数据请求，数据库对比用户名密码是否正确, 根据后端返回的结果进入首页</span><br><span class="line"></span><br><span class="line">5.setCookie将用户登录名密码token存cookie中   通过JWT(Json web token)</span><br><span class="line"></span><br><span class="line">6.免密登陆  getCookie获取token    发给后端对比    根据返回结果是否自动登陆</span><br><span class="line"></span><br><span class="line">7.注册通过Ant  Design ，validator中进行表单正则的验证</span><br><span class="line"></span><br><span class="line">8.用户体验  注册的时候跳转其他页面的时候给用户提示是否需要跳转，避免因为跳转后导致注册信息没有了   </span><br><span class="line">  用组件内后置守卫做</span><br><span class="line">  如果输入框都没有填信息,不拦截跳转如果用户输入信息,弹窗提示,点确定,跳转,点取消,不跳转</span><br></pre></td></tr></table></figure>
 
 <h3 id="项目中遇到什么困难-怎么解决的"><a href="#项目中遇到什么困难-怎么解决的" class="headerlink" title="项目中遇到什么困难,怎么解决的?"></a>项目中遇到什么困难,怎么解决的?</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.react中配置二级路由   地址变化  但是界面不更新    </span><br><span class="line">	使用dva&#x2F;router中的withRouter高阶组件解决的</span><br><span class="line">	</span><br><span class="line">2.图表联动怎么实现</span><br><span class="line">	我们只需要把当前被选中图表的事件，直接发给其他图表即可，然后判断被选中的图表是哪个作为区分</span><br><span class="line">	onTouchEvent(event)普通事件传递</span><br><span class="line">	  </span><br><span class="line">3.产品经理要求智能匹配产品 </span><br><span class="line">	找网上类似功能的网站  查看源码  和主管讨论</span><br><span class="line">	需要一个设计一个投资习惯和风险承受能力测试,</span><br><span class="line">	从后端获取这个客户测试的结果   以及客户平常投资的习惯   生成不同的关键字</span><br><span class="line">	根据关键字从数据库中匹配产品   展示界面</span><br><span class="line"></span><br><span class="line">4.后台管理系统遇到遇到什么奇葩的需求</span><br></pre></td></tr></table></figure>
