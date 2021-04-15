@@ -173,16 +173,27 @@ v-is
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;transition</span><br><span class="line">  mode=&quot;in-out&quot;</span><br><span class="line">  enter-active-class=&quot;animate__animated animate__backInLeft&quot;</span><br><span class="line">  leave-active-class=&quot;animate__animated animate__backOutLeft&quot;</span><br><span class="line">&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p><img src="/img/lifecycle.png" alt="avatar"></p>
+<h4 id="挂载阶段"><a href="#挂载阶段" class="headerlink" title="挂载阶段"></a>挂载阶段</h4><blockquote>
+<p>虚拟DOM在created – beforeMount生成，真实DOM在mounted拿到</p>
+</blockquote>
 <ol>
-<li>挂载阶段<ol>
-<li>beforeCreate 该钩子函数表示组件创建前，初始化事件和生命周期钩子函数</li>
-<li>created 该钩子函数表示创建结束，这里我们有了组件，初始化注入【option】并且数据响应式【数据改变，界面改变】处理</li>
-<li>beforeMount 判断组件是否有template选项？<ol>
+<li>beforeCreate()<ol>
+<li>该钩子函数表示组件创建前。</li>
+<li>初始化事件和生命周期钩子函数</li>
+</ol>
+</li>
+<li>created()<ol>
+<li>该钩子函数表示创建结束，</li>
+<li>这里我们有了组件。初始化注入【option】并且数据响应式【数据改变，界面改变】处理</li>
+</ol>
+</li>
+<li>beforeMount()<br> 判断组件是否有template选项？<ol>
 <li>yes  使用render函数来编译 template 得到虚拟DOM对象模型</li>
 <li>no   使用el.innerHTML来代替模板</li>
 </ol>
 </li>
-<li>mounted 创建app.$el来代替el 渲染虚拟DOM为真实DOM</li>
+<li>mounted() <ol>
+<li>创建app.$el来代替el 渲染虚拟DOM为真实DOM</li>
 </ol>
 </li>
 </ol>
@@ -190,6 +201,58 @@ v-is
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = Vue.createApp(&#123;&#125;)</span><br><span class="line">app.component(<span class="string">&#x27;Hello&#x27;</span>,&#123;</span><br><span class="line">  template: <span class="string">&#x27;#hello&#x27;</span>,</span><br><span class="line">  beforeCreate () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;挂载-beforeCreate&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  created () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;挂载-created&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeMount () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;挂载-beforeMount&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted () &#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;挂载-mounted&#x27;</span>)</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">&#x27;p&#x27;</span>).style.background = <span class="string">&#x27;red&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">app.mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
+<h4 id="更新阶段"><a href="#更新阶段" class="headerlink" title="更新阶段"></a>更新阶段</h4><blockquote>
+<p>触发要求: 1. 数据要改变 2. 数据得使用 可以触发多次。updated可以做真实DOM操作</p>
+</blockquote>
+<ol>
+<li>beforeUpdate()<ol>
+<li>它表示组件更新前</li>
+<li>任务: 用来监听数据改变的</li>
+</ol>
+</li>
+<li>updated()<ol>
+<li>它表示组件更新结束了</li>
+<li>任务：虚拟DOM渲染生成，并且通过diff算法比对新旧的虚拟DOM,得到一个patch补丁对象【虚拟DOM】，重新将patch补丁对象渲染到页面，也就是说我们又一次可以得到了真实DOM</li>
+</ol>
+</li>
+</ol>
+<h4 id="销毁阶段"><a href="#销毁阶段" class="headerlink" title="销毁阶段"></a>销毁阶段</h4><blockquote>
+<p>任选其一beforeUnmount或unmounted，他会自动删除组件的事件、指令、computed、watch，但需要手动删除计时器/定时器、window/document身上事件，清楚第三方实例，释放内存</p>
+</blockquote>
+<ol>
+<li>beforeUnmount()<ol>
+<li>它表示组件销毁前</li>
+<li>自动销毁组件定义methods/指令/computed/watch</li>
+<li>手动操作：<ol>
+<li>清除计时器和定时器</li>
+<li>清除绑定在window/document身上的事件</li>
+<li>清除第三方实例</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>unmounted() 同上</li>
+</ol>
+<h4 id="缓存阶段"><a href="#缓存阶段" class="headerlink" title="缓存阶段"></a>缓存阶段</h4><blockquote>
+<p>触发条件: keep-alive[缓存组件] 如果缓存时间过久，可以自动去清楚缓存在deactivated()中设置</p>
+</blockquote>
+<ol>
+<li>activated()<ol>
+<li>表示你正在前台显示</li>
+</ol>
+</li>
+<li>deactivated<ol start="2">
+<li>表示你正在后台缓存</li>
+</ol>
+</li>
+</ol>
+<h4 id="错误处理阶段"><a href="#错误处理阶段" class="headerlink" title="错误处理阶段"></a>错误处理阶段</h4><blockquote>
+<p>任务： 父组件捕获子组件的错误，使用另外一个界面来代替错误的子组件，而这个界面我们称呼为 回退UI。 errorCaptured 写在父组件中</p>
+</blockquote>
+<ol>
+<li>errorCaptured(error, instance, info){}</li>
+<li>error 错误 instance 组件 info 具体信息</li>
+</ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -213,7 +276,7 @@ v-is
     </div>
     
         <div class='side'>
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#VUE%E7%BB%84%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">VUE组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C"><span class="toc-number">1.1.</span> <span class="toc-text">注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%B5%8C%E5%A5%97"><span class="toc-number">1.2.</span> <span class="toc-text">组件嵌套</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6-%E7%BB%84%E5%90%88-%E6%8F%92%E6%A7%BD"><span class="toc-number">1.3.</span> <span class="toc-text">组件-组合-插槽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-is"><span class="toc-number">1.4.</span> <span class="toc-text">v-is</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E4%BF%A1"><span class="toc-number">1.5.</span> <span class="toc-text">通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%B8%A1%E5%8A%A8%E6%95%88"><span class="toc-number">1.6.</span> <span class="toc-text">过渡动效</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.7.</span> <span class="toc-text">生命周期</span></a></li></ol></li></ol>	
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#VUE%E7%BB%84%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">VUE组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C"><span class="toc-number">1.1.</span> <span class="toc-text">注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%B5%8C%E5%A5%97"><span class="toc-number">1.2.</span> <span class="toc-text">组件嵌套</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6-%E7%BB%84%E5%90%88-%E6%8F%92%E6%A7%BD"><span class="toc-number">1.3.</span> <span class="toc-text">组件-组合-插槽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-is"><span class="toc-number">1.4.</span> <span class="toc-text">v-is</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E4%BF%A1"><span class="toc-number">1.5.</span> <span class="toc-text">通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%B8%A1%E5%8A%A8%E6%95%88"><span class="toc-number">1.6.</span> <span class="toc-text">过渡动效</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.7.</span> <span class="toc-text">生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%82%E8%BD%BD%E9%98%B6%E6%AE%B5"><span class="toc-number">1.7.1.</span> <span class="toc-text">挂载阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E9%98%B6%E6%AE%B5"><span class="toc-number">1.7.2.</span> <span class="toc-text">更新阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%80%E6%AF%81%E9%98%B6%E6%AE%B5"><span class="toc-number">1.7.3.</span> <span class="toc-text">销毁阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E9%98%B6%E6%AE%B5"><span class="toc-number">1.7.4.</span> <span class="toc-text">缓存阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E9%98%B6%E6%AE%B5"><span class="toc-number">1.7.5.</span> <span class="toc-text">错误处理阶段</span></a></li></ol></li></ol></li></ol>	
         </div>
     
 </div>
