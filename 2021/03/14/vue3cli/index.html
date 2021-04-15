@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vue3 项目快速构建 - Cli - Mr.Chen</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="cheerless,"> 
+    <meta name="description" content="Vue3 项目快速构建 - Cli安装1$ cnpm i @vue/cli -g
+
+创建项目1$ vue create 项目名
+
+yarn
+安装1$ cnpm i yarn -g
+项目的操作命令12,"> 
+    <meta name="author" content="Xiao Suan"> 
+    <link rel="alternative" href="atom.xml" title="Mr.Chen" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Mr.Chen</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://cheerless.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Vue3 项目快速构建 - Cli</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Vue3 项目快速构建 - Cli</h1>
+        <div class="stuff">
+            <span>三月 14, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/vue3/" rel="tag">vue3</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="Vue3-项目快速构建-Cli"><a href="#Vue3-项目快速构建-Cli" class="headerlink" title="Vue3 项目快速构建 - Cli"></a>Vue3 项目快速构建 - Cli</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm i @vue/cli -g</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vue create 项目名</span><br></pre></td></tr></table></figure>
+<p><img src="/img/1-item.png" alt="avatar"><br><img src="/img/2-item.png" alt="avatar"><br><img src="/img/3-item.png" alt="avatar"><br><img src="/img/4-item.png" alt="avatar"></p>
+<h3 id="yarn"><a href="#yarn" class="headerlink" title="yarn"></a>yarn</h3><ol>
+<li>安装<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm i yarn -g</span><br></pre></td></tr></table></figure></li>
+<li>项目的操作命令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ yarn serve <span class="comment"># 开发环境下启动项目</span></span><br><span class="line">$ yarn build <span class="comment"># 生产环境压缩打包项目，供项目上线</span></span><br><span class="line">$ yarn lint <span class="comment"># 检测js语法规范</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="目录介绍"><a href="#目录介绍" class="headerlink" title="目录介绍"></a>目录介绍</h3><ol>
+<li>dist  生产环境打包后的资源存放目录</li>
+<li>node_modules  这里放置的都是项目的插件【第三方依赖【库】】</li>
+<li>public  静态资源<ol>
+<li>favicon.ico 网页的标题的logo</li>
+<li>index.html  项目的模板<ol>
+<li>提供vue的实例作用的范围容器</li>
+<li>引入一些资源</li>
+<li>建议： 不要去操作</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>src   源代码开发目录[ 程序员主要工作目录 ] <ol>
+<li>assets  静态资源【图片、字体文件】</li>
+<li>components  公共组件目录<ol>
+<li>xxx.vue </li>
+</ol>
+</li>
+<li>App.vue    App组件【一个vue文件就是一个组件】</li>
+<li>main.ts  项目入口文件</li>
+<li>shims-vue.d.ts  类型声明文件</li>
+<li>.borwserslistrc<ol>
+<li>浏览器支持度说明文件</li>
+</ol>
+</li>
+<li>.eslintrc.js   eslint语法规范配置文件</li>
+<li>.gitignore    git上传代码托管平台的配置文件</li>
+<li>babel.config.js  优雅降级配置文件 </li>
+<li>package.json  项目的记录文件，用于记录<ol>
+<li> 项目版本</li>
+<li> 项目是否私有</li>
+<li> 项目装了哪些插件</li>
+</ol>
+</li>
+<li>README.md  项目的说明书</li>
+<li>tsconfig.json ts的配置文件</li>
+<li>yarn.lock 项目中插件的版本锁定文件</li>
+</ol>
+</li>
+</ol>
+<h3 id="node-modules的安装和删除"><a href="#node-modules的安装和删除" class="headerlink" title="node_modules的安装和删除"></a>node_modules的安装和删除</h3><ol>
+<li>安装: yarn</li>
+<li>删除: rm -rf node_modules</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="http://domain.com/awesome.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue3-%E9%A1%B9%E7%9B%AE%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA-Cli"><span class="toc-number">1.</span> <span class="toc-text">Vue3 项目快速构建 - Cli</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.2.</span> <span class="toc-text">创建项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yarn"><span class="toc-number">1.3.</span> <span class="toc-text">yarn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.4.</span> <span class="toc-text">目录介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#node-modules%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%88%A0%E9%99%A4"><span class="toc-number">1.5.</span> <span class="toc-text">node_modules的安装和删除</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
