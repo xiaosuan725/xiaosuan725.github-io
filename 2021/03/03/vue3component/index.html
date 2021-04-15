@@ -80,8 +80,8 @@ v-is
 
 <h4 id="全局注册"><a href="#全局注册" class="headerlink" title="全局注册"></a>全局注册</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Vue.createApp(&#123;&#125;)</span><br><span class="line">    .component(<span class="string">&#x27;my-banner&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#banner&#x27;</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
-<h4 id="vue2和vue3的不同点，"><a href="#vue2和vue3的不同点，" class="headerlink" title="vue2和vue3的不同点，"></a>vue2和vue3的不同点，</h4><pre><code>1. vue3中发现template中可以直接写多个元素
-2. vue2 中template下的直接子元素有且仅有一个
+<h4 id="vue2和vue3的不同点，"><a href="#vue2和vue3的不同点，" class="headerlink" title="vue2和vue3的不同点，"></a>vue2和vue3的不同点，</h4><pre><code>1. vue3中发现template中可以直接写多个元素 | vue2 中template下的直接子元素有且仅有一个
+2. vue3中销毁阶段的钩子函数为beforeUnmount和Unmount | vue2中是beforeDestroy和destroyed
 </code></pre>
 <h3 id="组件嵌套"><a href="#组件嵌套" class="headerlink" title="组件嵌套"></a>组件嵌套</h3><blockquote>
 <p>组件嵌套就是将子组件以标签的形式放到父组件template中</p>
