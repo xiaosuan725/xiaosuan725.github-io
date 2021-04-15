@@ -218,7 +218,7 @@ v-is
 <li>表示你正在前台显示</li>
 </ol>
 </li>
-<li>deactivated<ol start="2">
+<li>deactivated()<ol start="2">
 <li>表示你正在后台缓存</li>
 </ol>
 </li>
@@ -236,12 +236,12 @@ v-is
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Vue.createApp(&#123;&#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Father&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#father&#x27;</span>,</span><br><span class="line">        <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                flag: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="function"><span class="title">errorCaptured</span>(<span class="params">error, instance, info</span>)</span> &#123; </span><br><span class="line">            <span class="comment">// 写在父组件中</span></span><br><span class="line">            <span class="comment">// 如果子组件抛出错误会触发</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&#x27;触发&#x27;</span>);</span><br><span class="line">            <span class="keyword">if</span> (error) &#123; <span class="comment">// 如果错误存在的话</span></span><br><span class="line">                <span class="built_in">this</span>.flag = <span class="literal">true</span> <span class="comment">// 改变flag从而改变页面</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Son&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#son&#x27;</span>,</span><br><span class="line">        <span class="function"><span class="title">mounted</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;出错了&#x27;</span>) <span class="comment">// 在挂载阶段仍出个自定义错误</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
 </ol>
 <h4 id="虚拟DOM跟踪阶段"><a href="#虚拟DOM跟踪阶段" class="headerlink" title="虚拟DOM跟踪阶段"></a>虚拟DOM跟踪阶段</h4><ol>
-<li>renderTracked<ol>
+<li>renderTracked()<ol>
 <li>触发的操作是get</li>
 <li>挂载的虚拟DOM和更新阶段虚拟DOM都会被追踪到</li>
 </ol>
 </li>
-<li>renderTriggered<ol>
+<li>renderTriggered()<ol>
 <li>触发的操作是set</li>
 <li>更新阶段虚拟DOM都会被追踪到</li>
 </ol>
