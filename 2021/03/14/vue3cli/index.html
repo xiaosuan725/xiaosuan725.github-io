@@ -121,7 +121,61 @@
 <li>安装: yarn</li>
 <li>删除: rm -rf node_modules</li>
 </ol>
-
+<h3 id="cli中"><a href="#cli中" class="headerlink" title="cli中"></a>cli中</h3><h4 id="阅读项目"><a href="#阅读项目" class="headerlink" title="阅读项目"></a>阅读项目</h4><h5 id="main-ts"><a href="#main-ts" class="headerlink" title="main.ts"></a>main.ts</h5><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span> <span class="comment">// 采用 es6模块化</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&#x27;./App.vue&#x27;</span></span><br><span class="line"></span><br><span class="line">createApp(App).mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>es6 导出<ol>
+<li>export default xxx 默认导出一个</li>
+<li>export xxx 批量导出，可以导出多个</li>
+</ol>
+</li>
+<li>es6 导入<ol>
+<li>import xxx from ‘xxx’ 默认导入</li>
+<li>批量导入<ol>
+<li>import {} from ‘xxx’</li>
+<li>import * as feom ‘xxx’</li>
+<li>import { obj as o } from ‘xxx’  // as 表示别名</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h5 id="APP-Vue"><a href="#APP-Vue" class="headerlink" title="APP.Vue"></a>APP.Vue</h5><ol>
+<li>.Vue结尾的文件，称为SFC(单文件组件)</li>
+<li>SFC构成(?表示可有可无)<ol>
+<li>template<ol>
+<li>jsx</li>
+</ol>
+</li>
+<li>script?<ol>
+<li>组件是通过defineComponent(options)</li>
+<li><a href="/2021/03/03/vue3component/">options就是之前的组件用法</a></li>
+</ol>
+</li>
+<li>style?<ol>
+<li>css预处理器: stylus/less/sass</li>
+<li>两个属性<ol>
+<li>lang 表示选择哪个css语法</li>
+<li>scoped<ol>
+<li>有 局部样式【只在当前组件生效】</li>
+<li>无 全局样式</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h5 id="vue-config-js"><a href="#vue-config-js" class="headerlink" title="vue.config.js"></a>vue.config.js</h5><ol>
+<li>vue.config.js 是项目的配置文件(建立在根目录下)</li>
+<li>可以配置: 跨域，路径别名，服务器配置，项目优化型的配置</li>
+<li>vue.config.js中实质上书写的是webpack</li>
+<li>webpack底层使用Node.js实现的</li>
+<li>Node.js 的模块化: Common.js</li>
+<li>每次修改项目配置文件，项目需要重启才能生效</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue.config.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    lintOnsave: <span class="literal">false</span>,</span><br><span class="line">    devServer: &#123;</span><br><span class="line">        overlay: &#123; <span class="comment">// eslint 关闭</span></span><br><span class="line">            warnings: <span class="literal">false</span>,</span><br><span class="line">            errors: <span class="literal">false</span></span><br><span class="line">        &#125;,</span><br><span class="line">        port: <span class="number">9000</span>, <span class="comment">// 服务器端口修改</span></span><br><span class="line">        proxy: &#123; <span class="comment">// 反向代理</span></span><br><span class="line">            <span class="comment">// 标识符: 反向代理的配置选项</span></span><br><span class="line">            <span class="comment">// 标识符我们选择接口中统一存在的路径，一般基本上都是域名后的第一个路径</span></span><br><span class="line">            <span class="comment">// 例如请求https://m.maoyan.com/ajax/movieOnInfoList </span></span><br><span class="line">            <span class="string">&#x27;/ajax&#x27;</span>: &#123;</span><br><span class="line">                target: <span class="string">&#x27;https://m.maoyan.com&#x27;</span>, <span class="comment">// 目标源</span></span><br><span class="line">                changeOrigin: <span class="literal">true</span>, <span class="comment">// 使用我们的源</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="http://domain.com/awesome.mp3">
@@ -144,7 +198,7 @@
     </div>
     
         <div class='side'>
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue3-%E9%A1%B9%E7%9B%AE%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA-Cli"><span class="toc-number">1.</span> <span class="toc-text">Vue3 项目快速构建 - Cli</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.2.</span> <span class="toc-text">创建项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yarn"><span class="toc-number">1.3.</span> <span class="toc-text">yarn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.4.</span> <span class="toc-text">目录介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#node-modules%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%88%A0%E9%99%A4"><span class="toc-number">1.5.</span> <span class="toc-text">node_modules的安装和删除</span></a></li></ol></li></ol>	
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue3-%E9%A1%B9%E7%9B%AE%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA-Cli"><span class="toc-number">1.</span> <span class="toc-text">Vue3 项目快速构建 - Cli</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.2.</span> <span class="toc-text">创建项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yarn"><span class="toc-number">1.3.</span> <span class="toc-text">yarn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.4.</span> <span class="toc-text">目录介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#node-modules%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%88%A0%E9%99%A4"><span class="toc-number">1.5.</span> <span class="toc-text">node_modules的安装和删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cli%E4%B8%AD"><span class="toc-number">1.6.</span> <span class="toc-text">cli中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%85%E8%AF%BB%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.6.1.</span> <span class="toc-text">阅读项目</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#main-ts"><span class="toc-number">1.6.1.1.</span> <span class="toc-text">main.ts</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#APP-Vue"><span class="toc-number">1.6.1.2.</span> <span class="toc-text">APP.Vue</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#vue-config-js"><span class="toc-number">1.6.1.3.</span> <span class="toc-text">vue.config.js</span></a></li></ol></li></ol></li></ol></li></ol>	
         </div>
     
 </div>
