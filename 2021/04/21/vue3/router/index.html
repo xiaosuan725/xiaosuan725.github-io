@@ -143,12 +143,13 @@ router/index.ts (step 1)1234,">
 <li>把之前的router-view组件用transtion组件包裹起来</li>
 <li>transtion有三个属性    1. mode    2. enter-active-class    3. leave-active-class<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- App.vue --&gt;</span></span><br><span class="line">&lt;transition</span><br><span class="line">  mode=&quot;out-in&quot;</span><br><span class="line">  enter-active-class=&quot;animate__animated animate__fadeInLeft&quot;</span><br><span class="line">  leave-active-class=&quot;animate__animated animate__fadeOutLeft&quot;</span><br><span class="line">&gt;</span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
 </ol>
-<h3 id="路由元数据"><a href="#路由元数据" class="headerlink" title="路由元数据"></a>路由元数据</h3><blockquote>
-<pre><code>   - 我们可以在routes中通过meta选项来携带一个数据，这个数据可以用来做很多事情，比如
-      - 头部内容的变化
-      - 面包屑导航
-</code></pre>
-</blockquote>
+<h3 id="路由元数据"><a href="#路由元数据" class="headerlink" title="路由元数据"></a>路由元数据</h3><ul>
+<li>我们可以在routes中通过meta选项来携带一个数据，这个数据可以用来做很多事情，比如<ul>
+<li>头部内容的变化</li>
+<li>面包屑导航</li>
+</ul>
+</li>
+</ul>
 <ol>
 <li>在router文件夹中修改about路由添加meta属性<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: <span class="string">&#x27;/about&#x27;</span>,</span><br><span class="line">    component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName:&quot;about&quot; */</span> <span class="string">&#x27;../pages/about/index.vue&#x27;</span>),</span><br><span class="line">    name: <span class="string">&#x27;about&#x27;</span>,</span><br><span class="line">    meta: &#123; <span class="comment">// 这是新增的</span></span><br><span class="line">        title: <span class="string">&#x27;这是关于页面&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></li>
 <li>进入about组件</li>
