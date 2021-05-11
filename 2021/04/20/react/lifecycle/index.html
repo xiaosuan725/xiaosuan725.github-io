@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>React 组件基础 - Mr.Chen</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="cheerless,"> 
+    <meta name="description" content="组件生命周期
+react谷歌调试插件：  react developer tools
+
+
+组件的生命周期
+react版本的生命周期： 15版本     16版本    17版本【主流】
+react ,"> 
+    <meta name="author" content="Xiao Suan"> 
+    <link rel="alternative" href="atom.xml" title="Mr.Chen" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Mr.Chen</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://cheerless.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">React 组件基础</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">React 组件基础</h1>
+        <div class="stuff">
+            <span>四月 20, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/react/" rel="tag">react</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="组件生命周期"><a href="#组件生命周期" class="headerlink" title="组件生命周期"></a>组件生命周期</h2><blockquote>
+<p>react谷歌调试插件：  react developer tools</p>
+</blockquote>
+<ol>
+<li>组件的生命周期<ol>
+<li>react版本的生命周期： 15版本     16版本    17版本【主流】<ol>
+<li>react  15.x.x    15版本生命周期</li>
+<li>react  16.0.0 - 16.3.x   16版本</li>
+<li>react  16.3.0以上    17版本 </li>
+</ol>
+</li>
+<li>除15版本以外，生命周期分为四个阶段<ol>
+<li>挂载阶段<ol>
+<li>特点： 自动执行，执行一次</li>
+</ol>
+</li>
+<li>更新阶段<ol>
+<li>触发条件： 组件调用了setState || forceUpdate</li>
+</ol>
+</li>
+<li>卸载阶段</li>
+<li>错误处理阶段【 15版本是没有的 】</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="挂载阶段"><a href="#挂载阶段" class="headerlink" title="挂载阶段"></a>挂载阶段</h3><ol>
+<li><p>constructor </p>
+<ul>
+<li>通过props参数可以获得绑定在组件身上的数据</li>
+<li>可以定义state</li>
+<li>可以为类中的普通函数绑定this指针<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// P 为interface ts类型声明</span></span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props: P</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 作用3 props接收绑定在组件身上的属性</span></span><br><span class="line">    <span class="comment">// console.log(&quot;props&quot;, props);</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="comment">// 作用1 定义state</span></span><br><span class="line">    <span class="built_in">this</span>.state = &#123;</span><br><span class="line">      name: <span class="string">&quot;yyc&quot;</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// 作用2 普通函数的this绑定</span></span><br><span class="line">    <span class="built_in">this</span>.handler = <span class="built_in">this</span>.handler.bind(<span class="built_in">this</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>static getDerivedStateFromProps(props,state) { return {} }</p>
+<ul>
+<li>从props中派生state<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件绑定money属性给这个组件</span></span><br><span class="line">  <span class="comment">// getDerivedStateFromProps 从属性中获取派生的状态</span></span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="title">getDerivedStateFromProps</span>(<span class="params">props: P, state: S</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;getDerivedStateFromProps&quot;</span>);</span><br><span class="line">    <span class="comment">// 作用 return返回值可以将props处理成state</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      money: props.money,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>render </p>
+<ul>
+<li>解析this.state &amp; this.props </li>
+<li>将jsx形式的虚拟dom转成对象形式的虚拟dom<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;p&gt; &#123;<span class="built_in">this</span>.state.name&#125; &lt;<span class="regexp">/p&gt; &#123;/</span>* 解析<span class="built_in">this</span>.state */&#125;</span><br><span class="line">      &lt;p&gt; &#123;<span class="built_in">this</span>.props.money&#125; &lt;<span class="regexp">/p&gt; &#123;/</span>* 解析<span class="built_in">this</span>.props */&#125;</span><br><span class="line">      &lt;p ref=&#123;<span class="function">(<span class="params">el</span>) =&gt;</span> (<span class="built_in">this</span>.p = el)&#125;&gt;asdds&lt;<span class="regexp">/p&gt; &#123;/</span>* 渲染成对象形式的虚拟DOM */&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>componentDidMount</p>
+<ul>
+<li>组件挂载结束</li>
+<li>数据请求发送</li>
+<li>获得到了真实dom,可以做真实DOM操作<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">componentDidMount</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="comment">// 表示组件挂载结束</span></span><br><span class="line">  <span class="comment">// 作用1: 将虚拟DOM 渲染成真实DOM，也就是可以做真实DOM处理</span></span><br><span class="line">  <span class="built_in">this</span>.p.style.background = <span class="string">&quot;red&quot;</span>;</span><br><span class="line">  <span class="comment">// 作用2: 发请求</span></span><br><span class="line">  fetch(<span class="string">&quot;http://59.110.226.77:3000/api/category&quot;</span>)</span><br><span class="line">    .then(<span class="function">(<span class="params">data</span>) =&gt;</span> data.json())</span><br><span class="line">    .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;res&quot;</span>, res);</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="function">(<span class="params">error</span>) =&gt;</span> <span class="built_in">Promise</span>.reject(error));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h3 id="更新阶段"><a href="#更新阶段" class="headerlink" title="更新阶段"></a>更新阶段</h3><ol>
+<li>static getDerivedStateFromProps 作用同挂载阶段<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="function"><span class="title">getDerivedStateFromProps</span>(<span class="params">props: P, state: S</span>)</span> &#123;</span><br><span class="line">  <span class="comment">// 挂载阶段和更新阶段都会执行</span></span><br><span class="line">  <span class="comment">// 作用同挂载阶段 用来使props变成state</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;gdsfp&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>shouldComponentUpdate  表示组件是否应该更新<ol>
+<li>return  true   表示组件更新</li>
+<li>return  false  表示组件不更新</li>
+<li>功能<ol>
+<li>渲染优化： 新属性vs旧属性   ||   新状态vs旧状态</li>
+<li>比较手动来写<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 渲染优化</span></span><br><span class="line"><span class="function"><span class="title">shouldComponentUpdate</span>(<span class="params">nextProps: P, nextState: S</span>)</span> &#123;</span><br><span class="line">  <span class="comment">// 必须有返回值 返回是一个布尔值</span></span><br><span class="line">  <span class="comment">// return true 表示允许组件重新渲染</span></span><br><span class="line">  <span class="comment">// return false 表示不允许组件重新渲染</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;scu&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.state.name !== nextState.name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>render 同挂载阶段</li>
+<li>getSnapShotBeforeUpdate     在更新前获取快照<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">getSnapshotBeforeUpdate = <span class="function">(<span class="params">prevProps: P, prevState: S</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;gsbu&quot;</span>);</span><br><span class="line">  <span class="comment">// 必须有返回值</span></span><br><span class="line">  <span class="comment">// 1. 可以得到旧的props和state</span></span><br><span class="line">  <span class="comment">// 2. 返回值可以传递一个数据给componentDidUpdate</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">1000</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>它的返回值会传递给componentDidUpdate的第三个参数</li>
+</ul>
+</li>
+<li>componentDidUpdate <ul>
+<li>将再次生成的虚拟DOM和就的虚拟DOM,通过filber进行比较，生成patch补丁对象</li>
+<li>patch补丁对象渲染为真实DOM</li>
+<li>发送数据请求</li>
+<li>真实dom操作</li>
+<li>可以获取getSnapShotBeforeUpdate传递过来的数据<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">componentDidUpdate</span>(<span class="params">prevProps: P, prevState: S, snapShot: <span class="built_in">number</span></span>)</span> &#123;</span><br><span class="line">  <span class="comment">// 表示组件更新阶段了</span></span><br><span class="line">  <span class="comment">// 1. 再次得到新的真实DOM</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2. 可以发请求</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 3. 通过snapShot得到getSnapshotBeforeUpdate传过来的值</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;我得到了&quot;</span>, snapShot);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="http://domain.com/awesome.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.</span> <span class="toc-text">组件生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%82%E8%BD%BD%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.</span> <span class="toc-text">挂载阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E9%98%B6%E6%AE%B5"><span class="toc-number">1.2.</span> <span class="toc-text">更新阶段</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
