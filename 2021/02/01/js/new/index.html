@@ -5,16 +5,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JS new关键字 + call/apply/bind - Mr.Chen</title>
+    <title>JS new关键字 - Mr.Chen</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="cheerless,"> 
     <meta name="description" content="new
-创建一个空对象obj
-obj链接到构造函数原型
-改变构造函数的this为obj
-构造函数没有返回值(值不是对象)则返回obj123456789101112131415161718192021,"> 
+创建一个空对象 obj
+obj 链接到构造函数原型
+改变构造函数的 this 为 obj
+构造函数没有返回值(值不是对象)则返回 obj
+
+1234567891011121314151617,"> 
     <meta name="author" content="Xiao Suan"> 
     <link rel="alternative" href="atom.xml" title="Mr.Chen" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -32,7 +34,7 @@ obj链接到构造函数原型
     <div class="bar" style="width: 0;"></div>
     <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://cheerless.cn"></a>
     <div title="播放/暂停" class="iconfont icon-play"></div>
-    <h3 class="subtitle">JS new关键字 + call/apply/bind</h3>
+    <h3 class="subtitle">JS new关键字</h3>
     <div class="social">
         <div>
             <div class="share">
@@ -47,7 +49,7 @@ obj链接到构造函数原型
     <div class="section">
         <div class="article">
     <div class='main'>
-        <h1 class="title">JS new关键字 + call/apply/bind</h1>
+        <h1 class="title">JS new关键字</h1>
         <div class="stuff">
             <span>二月 01, 2021</span>
             
@@ -57,11 +59,13 @@ obj链接到构造函数原型
         </div>
         <div class="content markdown">
             <h3 id="new"><a href="#new" class="headerlink" title="new"></a>new</h3><ol>
-<li>创建一个空对象obj</li>
-<li>obj链接到构造函数原型</li>
-<li>改变构造函数的this为obj</li>
-<li>构造函数没有返回值(值不是对象)则返回obj<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">People</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_new</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 1. 创建一个空对象</span></span><br><span class="line">  <span class="keyword">let</span> obj = &#123;&#125;;</span><br><span class="line">  <span class="comment">// 获取构造函数，并将arguments的第一个参数删除</span></span><br><span class="line">  <span class="keyword">let</span> Con = [].shift.call(<span class="built_in">arguments</span>);</span><br><span class="line">  <span class="comment">// 2. 链接到构造函数原型 (使它能访问到原型的属性)</span></span><br><span class="line">  obj.__proto__ = Con.prototype;</span><br><span class="line">  <span class="comment">// 3. 改变构造函数中this的指向并执行 (使用apply，使obj能够访问到构造函数中的属性，实现继承)</span></span><br><span class="line">  <span class="keyword">let</span> result = Con.apply(obj, <span class="built_in">arguments</span>);</span><br><span class="line">  <span class="comment">// 确保new出来是个对象</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> result === <span class="string">&quot;object&quot;</span> ? result : obj;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> People(<span class="string">&quot;zhangsan&quot;</span>, <span class="number">14</span>); <span class="comment">// 原生</span></span><br><span class="line"><span class="built_in">console</span>.log(p1);</span><br><span class="line"><span class="keyword">const</span> p2 = _new(People, <span class="string">&quot;lisi&quot;</span>, <span class="number">15</span>); <span class="comment">// 自己封装</span></span><br><span class="line"><span class="built_in">console</span>.log(p2);</span><br></pre></td></tr></table></figure></li>
+<li>创建一个空对象 obj</li>
+<li>obj 链接到构造函数原型</li>
+<li>改变构造函数的 this 为 obj</li>
+<li>构造函数没有返回值(值不是对象)则返回 obj</li>
 </ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">People</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_new</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 1. 创建一个空对象</span></span><br><span class="line">  <span class="keyword">let</span> obj = &#123;&#125;;</span><br><span class="line">  <span class="comment">// 获取构造函数，并将arguments的第一个参数删除</span></span><br><span class="line">  <span class="keyword">let</span> Con = [].shift.call(<span class="built_in">arguments</span>);</span><br><span class="line">  <span class="comment">// 2. 链接到构造函数原型 (使它能访问到原型的属性)</span></span><br><span class="line">  obj.__proto__ = Con.prototype;</span><br><span class="line">  <span class="comment">// 3. 改变构造函数中this的指向并执行 (使用apply，使obj能够访问到构造函数中的属性，实现继承)</span></span><br><span class="line">  <span class="keyword">let</span> result = Con.apply(obj, <span class="built_in">arguments</span>);</span><br><span class="line">  <span class="comment">// 4. 构造函数没有返回值(值不是对象)则返回 obj</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> result === <span class="string">&quot;object&quot;</span> ? result : obj;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> People(<span class="string">&quot;zhangsan&quot;</span>, <span class="number">14</span>); <span class="comment">// 原生</span></span><br><span class="line"><span class="built_in">console</span>.log(p1);</span><br><span class="line"><span class="keyword">const</span> p2 = _new(People, <span class="string">&quot;lisi&quot;</span>, <span class="number">15</span>); <span class="comment">// 自己封装</span></span><br><span class="line"><span class="built_in">console</span>.log(p2);</span><br></pre></td></tr></table></figure>
+
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
