@@ -28,6 +28,29 @@
       </tags>
   </entry>
   <entry>
+    <title>Git 基础命令</title>
+    <url>/2020/06/13/gitbash/</url>
+    <content><![CDATA[<h1 id="Git-入门"><a href="#Git-入门" class="headerlink" title="Git 入门"></a>Git 入门</h1><p>Git 是目前世界上最先进的分布式版本控制系统。</p>
+<h3 id="本地仓库"><a href="#本地仓库" class="headerlink" title="本地仓库"></a>本地仓库</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建本地仓库</span></span><br><span class="line">$ git init</span><br><span class="line">$ ls -ah <span class="comment"># 查看隐藏的.git文件夹</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交到暂存区</span></span><br><span class="line">$ git add &lt;fileName&gt;</span><br><span class="line">$ git add . <span class="comment"># 添加全部</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交到仓库</span></span><br><span class="line">$ git commit -m <span class="string">&quot;描述内容&quot;</span> <span class="comment">#将暂存区的内容一次性提交到仓库</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看仓库当前状态</span></span><br><span class="line">$ git status</span><br></pre></td></tr></table></figure>
+
+<h3 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建SSH Key</span></span><br><span class="line">$ ssh-keygen -t rsa -C <span class="string">&quot;邮箱地址&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地关联远程库</span></span><br><span class="line">$ git remote add origin 远程库地址</span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地内容推送到远程库</span></span><br><span class="line">$ git push -u origin master <span class="comment"># 第一次推送要加-u 参数 推荐已存在项目上传</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆远程库到本地</span></span><br><span class="line">$ git <span class="built_in">clone</span> 远程库地址 <span class="comment"># 推荐新建项目，每人拉取</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看远程库</span></span><br><span class="line">$ git remote</span><br><span class="line"><span class="comment"># 或者 $ git remote -v</span></span><br><span class="line"><span class="comment"># 查看更详细信息</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a>标签管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建新标签</span></span><br><span class="line">$ git tag &lt;name&gt; <span class="comment"># 默认新建在最新提交的commit上</span></span><br><span class="line">$ git tag &lt;name&gt; <span class="comment"># 或对制定版本号打标签</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有标签</span></span><br><span class="line">$ git tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看指定标签信息</span></span><br><span class="line">$ git show &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除标签</span></span><br><span class="line">$ git tag -d &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签推送到远程</span></span><br><span class="line">$ git push origin &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送全部标签</span></span><br><span class="line">$ git push origin --tags</span><br></pre></td></tr></table></figure>
+
+<h3 id="版本回退与管理"><a href="#版本回退与管理" class="headerlink" title="版本回退与管理"></a>版本回退与管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看修改的内容</span></span><br><span class="line">$ git diff</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看历史版本</span></span><br><span class="line">$ git <span class="built_in">log</span></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$ git <span class="built_in">log</span> --pretty=oneline <span class="comment"># 只看版本号和描述内容</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退到上个版本</span></span><br><span class="line">$ git reset --hard HEAD^</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退上上个版本</span></span><br><span class="line">$ git reset --hard HEAD^^</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退上N个版本</span></span><br><span class="line">$ git reset --hard HEAD-N</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退或前进到指定版本</span></span><br><span class="line">$ git reset --hard xxxx(<span class="built_in">hash</span>前6位)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看之前的命令</span></span><br><span class="line">$ git reflog <span class="comment"># 可查看回退之后找不到的版本号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 丢弃工作区的修改</span></span><br><span class="line">$ git checkout -- &lt;fileName&gt;</span><br><span class="line"><span class="comment"># 若没放到暂存区，现在，撤销到和版本库一样</span></span><br><span class="line"><span class="comment"># 若已添加到暂存区，撤销到和咱去存一样</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 确定删除文件</span></span><br><span class="line">$ git rm &lt;fileName&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复删除文件</span></span><br><span class="line">$ git checkout -- &lt;fileName&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建分支</span></span><br><span class="line">$ git branch 分支名</span><br><span class="line"><span class="comment"># $ git checkout -b 相当于创建并切换</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换分支</span></span><br><span class="line">$ git checkout 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看分支</span></span><br><span class="line">$ git branch <span class="comment"># 当前分支前面会加上*</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 分支合并</span></span><br><span class="line">$ git merge 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支</span></span><br><span class="line">$ git branch -d 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 冲突解决</span></span><br><span class="line"><span class="comment"># 手动修改保存后再提交</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看分支合并图</span></span><br><span class="line">$ git <span class="built_in">log</span> --graph</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取消快进模式</span></span><br><span class="line">$ git merge --no-ff -m <span class="string">&quot;描述信息&quot;</span> dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 存储当前内容</span></span><br><span class="line">$ git stash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复存储</span></span><br><span class="line">$ git stash pop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送分支</span></span><br><span class="line">$ git push origin 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建远程分支到本地</span></span><br><span class="line">$ git checkout -b 分支名 origin/分支名</span><br></pre></td></tr></table></figure>
+
+<h3 id="奇怪但有用的命令"><a href="#奇怪但有用的命令" class="headerlink" title="奇怪但有用的命令"></a>奇怪但有用的命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git pull origin master --allow-unrelated-histories</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Typescript 学习笔记</title>
     <url>/2020/04/08/ts1/</url>
     <content><![CDATA[<h3 id="js-的原生类型"><a href="#js-的原生类型" class="headerlink" title="js 的原生类型"></a>js 的原生类型</h3><ol>
@@ -144,29 +167,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Git 基础命令</title>
-    <url>/2020/06/13/gitbash/</url>
-    <content><![CDATA[<h1 id="Git-入门"><a href="#Git-入门" class="headerlink" title="Git 入门"></a>Git 入门</h1><p>Git 是目前世界上最先进的分布式版本控制系统。</p>
-<h3 id="本地仓库"><a href="#本地仓库" class="headerlink" title="本地仓库"></a>本地仓库</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建本地仓库</span></span><br><span class="line">$ git init</span><br><span class="line">$ ls -ah <span class="comment"># 查看隐藏的.git文件夹</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交到暂存区</span></span><br><span class="line">$ git add &lt;fileName&gt;</span><br><span class="line">$ git add . <span class="comment"># 添加全部</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交到仓库</span></span><br><span class="line">$ git commit -m <span class="string">&quot;描述内容&quot;</span> <span class="comment">#将暂存区的内容一次性提交到仓库</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看仓库当前状态</span></span><br><span class="line">$ git status</span><br></pre></td></tr></table></figure>
-
-<h3 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建SSH Key</span></span><br><span class="line">$ ssh-keygen -t rsa -C <span class="string">&quot;邮箱地址&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地关联远程库</span></span><br><span class="line">$ git remote add origin 远程库地址</span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地内容推送到远程库</span></span><br><span class="line">$ git push -u origin master <span class="comment"># 第一次推送要加-u 参数 推荐已存在项目上传</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆远程库到本地</span></span><br><span class="line">$ git <span class="built_in">clone</span> 远程库地址 <span class="comment"># 推荐新建项目，每人拉取</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看远程库</span></span><br><span class="line">$ git remote</span><br><span class="line"><span class="comment"># 或者 $ git remote -v</span></span><br><span class="line"><span class="comment"># 查看更详细信息</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a>标签管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建新标签</span></span><br><span class="line">$ git tag &lt;name&gt; <span class="comment"># 默认新建在最新提交的commit上</span></span><br><span class="line">$ git tag &lt;name&gt; <span class="comment"># 或对制定版本号打标签</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有标签</span></span><br><span class="line">$ git tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看指定标签信息</span></span><br><span class="line">$ git show &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除标签</span></span><br><span class="line">$ git tag -d &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签推送到远程</span></span><br><span class="line">$ git push origin &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送全部标签</span></span><br><span class="line">$ git push origin --tags</span><br></pre></td></tr></table></figure>
-
-<h3 id="版本回退与管理"><a href="#版本回退与管理" class="headerlink" title="版本回退与管理"></a>版本回退与管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看修改的内容</span></span><br><span class="line">$ git diff</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看历史版本</span></span><br><span class="line">$ git <span class="built_in">log</span></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$ git <span class="built_in">log</span> --pretty=oneline <span class="comment"># 只看版本号和描述内容</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退到上个版本</span></span><br><span class="line">$ git reset --hard HEAD^</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退上上个版本</span></span><br><span class="line">$ git reset --hard HEAD^^</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退上N个版本</span></span><br><span class="line">$ git reset --hard HEAD-N</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退或前进到指定版本</span></span><br><span class="line">$ git reset --hard xxxx(<span class="built_in">hash</span>前6位)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看之前的命令</span></span><br><span class="line">$ git reflog <span class="comment"># 可查看回退之后找不到的版本号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 丢弃工作区的修改</span></span><br><span class="line">$ git checkout -- &lt;fileName&gt;</span><br><span class="line"><span class="comment"># 若没放到暂存区，现在，撤销到和版本库一样</span></span><br><span class="line"><span class="comment"># 若已添加到暂存区，撤销到和咱去存一样</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 确定删除文件</span></span><br><span class="line">$ git rm &lt;fileName&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复删除文件</span></span><br><span class="line">$ git checkout -- &lt;fileName&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建分支</span></span><br><span class="line">$ git branch 分支名</span><br><span class="line"><span class="comment"># $ git checkout -b 相当于创建并切换</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换分支</span></span><br><span class="line">$ git checkout 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看分支</span></span><br><span class="line">$ git branch <span class="comment"># 当前分支前面会加上*</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 分支合并</span></span><br><span class="line">$ git merge 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支</span></span><br><span class="line">$ git branch -d 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 冲突解决</span></span><br><span class="line"><span class="comment"># 手动修改保存后再提交</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看分支合并图</span></span><br><span class="line">$ git <span class="built_in">log</span> --graph</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取消快进模式</span></span><br><span class="line">$ git merge --no-ff -m <span class="string">&quot;描述信息&quot;</span> dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 存储当前内容</span></span><br><span class="line">$ git stash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复存储</span></span><br><span class="line">$ git stash pop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送分支</span></span><br><span class="line">$ git push origin 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建远程分支到本地</span></span><br><span class="line">$ git checkout -b 分支名 origin/分支名</span><br></pre></td></tr></table></figure>
-
-<h3 id="奇怪但有用的命令"><a href="#奇怪但有用的命令" class="headerlink" title="奇怪但有用的命令"></a>奇怪但有用的命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git pull origin master --allow-unrelated-histories</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Css 弹性盒子</title>
     <url>/2020/02/01/css/flex/</url>
     <content><![CDATA[<h2 id="FLEX-布局"><a href="#FLEX-布局" class="headerlink" title="FLEX 布局"></a>FLEX 布局</h2><blockquote>
@@ -248,38 +248,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JS Set和Map数据结构</title>
-    <url>/2020/05/12/js/SetandMap/</url>
-    <content><![CDATA[<h2 id="Set-和-Map-数据结构"><a href="#Set-和-Map-数据结构" class="headerlink" title="Set 和 Map 数据结构"></a>Set 和 Map 数据结构</h2><h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><blockquote>
-<p>ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。</p>
-</blockquote>
-<h4 id="属性和方法"><a href="#属性和方法" class="headerlink" title="属性和方法"></a>属性和方法</h4><ol>
-<li>Set.protitype.size 返回 Set 实例成员总数</li>
-<li>Set.protitype.add(value) 给 Set 添加某个值，返回 Set 结构本身</li>
-<li>Set.protitype.delete(value) 删除某个值，返回布尔值，表示是否删除成功</li>
-<li>Set.protitype.has(value) 返回一个布尔值，表示是否为 Set 成员</li>
-<li>Set.protitype.clear() 清除所有成员，没有返回值</li>
-</ol>
-<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><blockquote>
-<p>Map 提供了”值-&gt;值”的对应</p>
-</blockquote>
-<h4 id="属性和方法-1"><a href="#属性和方法-1" class="headerlink" title="属性和方法"></a>属性和方法</h4><ol>
-<li>Map.protitype.size</li>
-<li>Map.protitype.set(key,value)</li>
-<li>Map.protitype.get(key)</li>
-<li>Map.protitype.has(key)</li>
-<li>Map.protitype.delete(key)</li>
-<li>Map.protitype.clear()</li>
-</ol>
-]]></content>
-      <categories>
-        <category>js</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JS SPA单页面应用(原理)</title>
     <url>/2020/04/08/js/SPA/</url>
     <content><![CDATA[<h1 id="SPA"><a href="#SPA" class="headerlink" title="SPA"></a>SPA</h1><p>单页面应用</p>
@@ -309,6 +277,38 @@
     <title>JS cookie的封装</title>
     <url>/2020/04/06/js/cookie/</url>
     <content><![CDATA[<h2 id="封装了一个-cookie"><a href="#封装了一个-cookie" class="headerlink" title="封装了一个 cookie"></a>封装了一个 cookie</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cookie = &#123;</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params">key</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.cookie) &#123;</span><br><span class="line">      <span class="keyword">let</span> cookies = <span class="built_in">document</span>.cookie.split(<span class="string">&quot;; &quot;</span>);</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> cookies) &#123;</span><br><span class="line">        <span class="keyword">let</span> item = cookies[i].split(<span class="string">&quot;=&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (item[<span class="number">0</span>] === key) &#123;</span><br><span class="line">          <span class="keyword">return</span> item[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span>; <span class="comment">// 遍历结束没有cookie 返回空字符串</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">set</span>(<span class="params">key, value, day</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> day === <span class="string">&quot;number&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> d = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">      d.setDate(d.getDate() + day);</span><br><span class="line">      <span class="built_in">document</span>.cookie = <span class="string">`<span class="subst">$&#123;key&#125;</span>=<span class="subst">$&#123;value&#125;</span>;path=/;expires=<span class="subst">$&#123;d&#125;</span>`</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">document</span>.cookie = <span class="string">`<span class="subst">$&#123;key&#125;</span>=<span class="subst">$&#123;value&#125;</span>;path=/`</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">remove</span>(<span class="params">key</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.set(key, <span class="string">&quot;&quot;</span>, -<span class="number">1</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>js</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS Set和Map数据结构</title>
+    <url>/2020/05/12/js/SetandMap/</url>
+    <content><![CDATA[<h2 id="Set-和-Map-数据结构"><a href="#Set-和-Map-数据结构" class="headerlink" title="Set 和 Map 数据结构"></a>Set 和 Map 数据结构</h2><h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><blockquote>
+<p>ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。</p>
+</blockquote>
+<h4 id="属性和方法"><a href="#属性和方法" class="headerlink" title="属性和方法"></a>属性和方法</h4><ol>
+<li>Set.protitype.size 返回 Set 实例成员总数</li>
+<li>Set.protitype.add(value) 给 Set 添加某个值，返回 Set 结构本身</li>
+<li>Set.protitype.delete(value) 删除某个值，返回布尔值，表示是否删除成功</li>
+<li>Set.protitype.has(value) 返回一个布尔值，表示是否为 Set 成员</li>
+<li>Set.protitype.clear() 清除所有成员，没有返回值</li>
+</ol>
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><blockquote>
+<p>Map 提供了”值-&gt;值”的对应</p>
+</blockquote>
+<h4 id="属性和方法-1"><a href="#属性和方法-1" class="headerlink" title="属性和方法"></a>属性和方法</h4><ol>
+<li>Map.protitype.size</li>
+<li>Map.protitype.set(key,value)</li>
+<li>Map.protitype.get(key)</li>
+<li>Map.protitype.has(key)</li>
+<li>Map.protitype.delete(key)</li>
+<li>Map.protitype.clear()</li>
+</ol>
 ]]></content>
       <categories>
         <category>js</category>
@@ -451,7 +451,7 @@
 <p>修改 src/App.tsx,引入 antd 按钮组件</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; FC &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Button &#125; <span class="keyword">from</span> <span class="string">&quot;antd&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./App.css&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App: FC = <span class="function">() =&gt;</span> (</span><br><span class="line">  &lt;div className=<span class="string">&quot;App&quot;</span>&gt;</span><br><span class="line">    &lt;Button type=<span class="string">&quot;primary&quot;</span>&gt;Button&lt;/Button&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
 
-<p>修改 src/App.css 在文件顶部引入 antd 样式</p>
+<p>修改 index.css 在文件顶部引入 antd 样式</p>
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&quot;~antd/dist/antd.css&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <h3 id="安装-craco-和-craco-less"><a href="#安装-craco-和-craco-less" class="headerlink" title="安装 craco 和 craco-less"></a>安装 craco 和 craco-less</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yarn add @craco/craco</span><br><span class="line">$ yarn add craco-less</span><br></pre></td></tr></table></figure>
@@ -472,7 +472,7 @@
 <figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">background</span>: pink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在 App.tsx 中引入</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; FC &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Button &#125; <span class="keyword">from</span> <span class="string">&quot;antd&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./App.css&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">&quot;./test.less&quot;</span>; <span class="comment">// 引入局部样式styles</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App: FC = <span class="function">() =&gt;</span> (</span><br><span class="line">  &lt;div className=<span class="string">&quot;App&quot;</span>&gt;</span><br><span class="line">    &lt;Button <span class="keyword">type</span>=<span class="string">&quot;primary&quot;</span>&gt;Button&lt;/Button&gt;</span><br><span class="line">    &lt;p className=&#123;styles.box&#125;&gt;&lt;<span class="regexp">/p&gt; &#123;/</span>* 局部样式用xx.xx来写 */&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; FC &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Button &#125; <span class="keyword">from</span> <span class="string">&quot;antd&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">&quot;./test.less&quot;</span>; <span class="comment">// 引入局部样式styles</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App: FC = <span class="function">() =&gt;</span> (</span><br><span class="line">  &lt;div className=<span class="string">&quot;App&quot;</span>&gt;</span><br><span class="line">    &lt;Button <span class="keyword">type</span>=<span class="string">&quot;primary&quot;</span>&gt;Button&lt;/Button&gt;</span><br><span class="line">    &lt;p className=&#123;styles.box&#125;&gt;&lt;<span class="regexp">/p&gt; &#123;/</span>* 局部样式用xx.xx来写 */&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>react</category>
