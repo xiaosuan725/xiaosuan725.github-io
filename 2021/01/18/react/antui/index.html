@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>React 引入ant design并配置less局部样式 - Mr.Chen</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="cheerless,"> 
+    <meta name="description" content="此项目运用 TypeScript + cra安装 ts 版 cra1$ yarn create react-app 项目名 --template typescript
+
+引入 antd1$ yarn,"> 
+    <meta name="author" content="Xiao Suan"> 
+    <link rel="alternative" href="atom.xml" title="Mr.Chen" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Mr.Chen</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://cheerless.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">React 引入ant design并配置less局部样式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">React 引入ant design并配置less局部样式</h1>
+        <div class="stuff">
+            <span>一月 18, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/react/" rel="tag">react</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="此项目运用-TypeScript-cra"><a href="#此项目运用-TypeScript-cra" class="headerlink" title="此项目运用 TypeScript + cra"></a>此项目运用 TypeScript + cra</h2><h3 id="安装-ts-版-cra"><a href="#安装-ts-版-cra" class="headerlink" title="安装 ts 版 cra"></a>安装 ts 版 cra</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn create react-app 项目名 --template typescript</span><br></pre></td></tr></table></figure>
+
+<h3 id="引入-antd"><a href="#引入-antd" class="headerlink" title="引入 antd"></a>引入 antd</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add antd</span><br></pre></td></tr></table></figure>
+
+<p>修改 src/App.tsx,引入 antd 按钮组件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; FC &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Button &#125; <span class="keyword">from</span> <span class="string">&quot;antd&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./App.css&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App: FC = <span class="function">() =&gt;</span> (</span><br><span class="line">  &lt;div className=<span class="string">&quot;App&quot;</span>&gt;</span><br><span class="line">    &lt;Button type=<span class="string">&quot;primary&quot;</span>&gt;Button&lt;/Button&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+
+<p>修改 index.css 在文件顶部引入 antd 样式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&quot;~antd/dist/antd.css&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-craco-和-craco-less"><a href="#安装-craco-和-craco-less" class="headerlink" title="安装 craco 和 craco-less"></a>安装 craco 和 craco-less</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add @craco/craco</span><br><span class="line">$ yarn add craco-less</span><br></pre></td></tr></table></figure>
+
+<p>在 package.json 中修改 script 属性</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* package.json */</span></span><br><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">-   &quot;start&quot;: &quot;react-scripts start&quot;,</span><br><span class="line">-   &quot;build&quot;: &quot;react-scripts build&quot;,</span><br><span class="line">-   &quot;test&quot;: &quot;react-scripts test&quot;,</span><br><span class="line">+   &quot;start&quot;: &quot;craco start&quot;,</span><br><span class="line">+   &quot;build&quot;: &quot;craco build&quot;,</span><br><span class="line">+   &quot;test&quot;: &quot;craco test&quot;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在项目跟目录创建 craco.config.js 用于修改默认配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// craco.config.js</span></span><br><span class="line"><span class="keyword">const</span> CracoLessPlugin = <span class="built_in">require</span>(<span class="string">&quot;craco-less&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  plugins: [</span><br><span class="line">    &#123;</span><br><span class="line">      plugin: CracoLessPlugin,</span><br><span class="line">      options: &#123;</span><br><span class="line">        lessLoaderOptions: &#123;</span><br><span class="line">          lessOptions: &#123;</span><br><span class="line">            modifyVars: &#123; <span class="string">&quot;@primary-color&quot;</span>: <span class="string">&quot;#1DA57A&quot;</span> &#125;,</span><br><span class="line">            javascriptEnabled: <span class="literal">true</span>,</span><br><span class="line">          &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">        cssLoaderOptions: &#123;</span><br><span class="line">          modules: &#123; <span class="attr">localIdentName</span>: <span class="string">&quot;[local]_[hash:base64:5]&quot;</span> &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建声明文件"><a href="#创建声明文件" class="headerlink" title="创建声明文件"></a>创建声明文件</h3><p>用于声明.less 结尾的文件,在 src 目录下创建 type-css.d.ts</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">declare</span> <span class="built_in">module</span> <span class="string">&quot;*.less&quot;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> classes: &#123;</span><br><span class="line">    <span class="keyword">readonly</span> [key: <span class="built_in">string</span>]: <span class="built_in">string</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> classes;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建完后要引入，在 tsconfig.json 中</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;compilerOptions&quot;: &#123;</span><br><span class="line">    +  &quot;experimentalDecorators&quot;: true,  // 新增</span><br><span class="line">&#125;,</span><br><span class="line">&quot;include&quot;: [</span><br><span class="line">    +  &quot;type-css.d.ts&quot;</span><br><span class="line">  ]</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>新建一个 test.less 文件</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">background</span>: pink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 App.tsx 中引入</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; FC &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Button &#125; <span class="keyword">from</span> <span class="string">&quot;antd&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">&quot;./test.less&quot;</span>; <span class="comment">// 引入局部样式styles</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App: FC = <span class="function">() =&gt;</span> (</span><br><span class="line">  &lt;div className=<span class="string">&quot;App&quot;</span>&gt;</span><br><span class="line">    &lt;Button <span class="keyword">type</span>=<span class="string">&quot;primary&quot;</span>&gt;Button&lt;/Button&gt;</span><br><span class="line">    &lt;p className=&#123;styles.box&#125;&gt;&lt;<span class="regexp">/p&gt; &#123;/</span>* 局部样式用xx.xx来写 */&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="http://domain.com/awesome.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A4%E9%A1%B9%E7%9B%AE%E8%BF%90%E7%94%A8-TypeScript-cra"><span class="toc-number">1.</span> <span class="toc-text">此项目运用 TypeScript + cra</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-ts-%E7%89%88-cra"><span class="toc-number">1.1.</span> <span class="toc-text">安装 ts 版 cra</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%85%A5-antd"><span class="toc-number">1.2.</span> <span class="toc-text">引入 antd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-craco-%E5%92%8C-craco-less"><span class="toc-number">1.3.</span> <span class="toc-text">安装 craco 和 craco-less</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%A3%B0%E6%98%8E%E6%96%87%E4%BB%B6"><span class="toc-number">1.4.</span> <span class="toc-text">创建声明文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">1.5.</span> <span class="toc-text">测试</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

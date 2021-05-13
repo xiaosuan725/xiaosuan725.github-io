@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vue3 vue-router - Mr.Chen</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="cheerless,"> 
+    <meta name="description" content="vue-router安装1yarn add vue-router@4
+
+打造路由实例
+在 src 目录下新建 router,再新建 index.ts
+router/index.ts (step 1),"> 
+    <meta name="author" content="Xiao Suan"> 
+    <link rel="alternative" href="atom.xml" title="Mr.Chen" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Mr.Chen</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://cheerless.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Vue3 vue-router</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Vue3 vue-router</h1>
+        <div class="stuff">
+            <span>十二月 16, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/vue3/" rel="tag">vue3</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="vue-router"><a href="#vue-router" class="headerlink" title="vue-router"></a>vue-router</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add vue-router@4</span><br></pre></td></tr></table></figure>
+
+<h3 id="打造路由实例"><a href="#打造路由实例" class="headerlink" title="打造路由实例"></a>打造路由实例</h3><ol>
+<li>在 src 目录下新建 router,再新建 index.ts</li>
+<li>router/index.ts (step 1)</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.ts</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// step 1</span></span><br><span class="line"><span class="comment">// 引入createRouter</span></span><br><span class="line"><span class="keyword">import</span> &#123; createRouter &#125; <span class="keyword">from</span> <span class="string">&quot;vue-router&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = createRouter(&#123;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在 main.ts 中引入</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&quot;./router&quot;</span>;</span><br><span class="line">createApp(App).use(router).mount(<span class="string">&quot;#app&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>在 src 目录下新建 pages 文件夹，再新建一些即将打造的路由(home,application,cate,about,list,not-found),里面写组件</p>
+</li>
+<li><p>createRouter() 中有两个参数</p>
+<ol>
+<li>history 用于选择路由模式</li>
+</ol>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">路由模式</span><br><span class="line">1. hash模式        比如：  #/home</span><br><span class="line">    - 兼容性强，ie/其他浏览器</span><br><span class="line">    - 写法很别扭</span><br><span class="line">2. history模式     比如：  /home</span><br><span class="line">    - 新出的，基于html5做出来的，功能强大</span><br><span class="line">    - 缺点</span><br><span class="line">       - 看起来太像后端接口，所以一旦使用history模式就必须和后端配合使用</span><br><span class="line">       - 这家伙看起来也像反向代理标识符，所以切记不能和反向代理标识符一致</span><br><span class="line">       - 不兼容ie6-8</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>routes 路由表</li>
+</ol>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    用于确定一个路由对应一个组件</span><br><span class="line">&#123;</span><br><span class="line">  path: 路由路径    比如： /home</span><br><span class="line">  component：路由渲染的组件</span><br><span class="line">  meta  元数据 用于携带数据，比如做类似： 权限的功能</span><br><span class="line">  redirect  重定向</span><br><span class="line">  alias   别名【小名】</span><br><span class="line">  children   子路由表   /home/hot</span><br><span class="line">  beforeEnter   路由独享守卫，用于判断你是否有权限进入当前路由</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">component后面跟着的组件要使用路由懒加载</span><br><span class="line">1. 写法</span><br><span class="line">    1. （）=&gt; import()  vue的异步组件</span><br><span class="line">    2. /*webpackChunkName:&#x27;chunkName&#x27;*/ // webpack的代码分割功能</span><br></pre></td></tr></table></figure></li>
+<li><p>router/index.ts (step 2)</p>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.ts</span></span><br><span class="line"><span class="comment">// step 2</span></span><br><span class="line"><span class="comment">// 引入createWebHistory</span></span><br><span class="line"><span class="keyword">import</span> &#123; createRouter, createWebHistory &#125; <span class="keyword">from</span> <span class="string">&quot;vue-router&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = createRouter(&#123;</span><br><span class="line">  history: createWebHistory(),</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">&quot;/&quot;</span>,</span><br><span class="line">      redirect: <span class="string">&quot;/home&quot;</span>, <span class="comment">// 重定向到home</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">&quot;/home&quot;</span>,</span><br><span class="line">      component: <span class="function">() =&gt;</span></span><br><span class="line">        <span class="keyword">import</span>(<span class="comment">/* webpackChunkName:&quot;home&quot; */</span> <span class="string">&quot;../pages/home/index.vue&quot;</span>),</span><br><span class="line">      name: <span class="string">&quot;home&quot;</span>,</span><br><span class="line">      children: [</span><br><span class="line">        &#123;</span><br><span class="line">          path: <span class="string">&quot;/home/father&quot;</span>,</span><br><span class="line">          component: <span class="function">() =&gt;</span></span><br><span class="line">            <span class="keyword">import</span>(<span class="comment">/* webpackChunkName:&quot;home&quot; */</span> <span class="string">&quot;../pages/home/far.vue&quot;</span>),</span><br><span class="line">          name: <span class="string">&quot;father&quot;</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          path: <span class="string">&quot;/home/son&quot;</span>,</span><br><span class="line">          component: <span class="function">() =&gt;</span></span><br><span class="line">            <span class="keyword">import</span>(<span class="comment">/* webpackChunkName:&quot;home&quot; */</span> <span class="string">&quot;../pages/home/son.vue&quot;</span>),</span><br><span class="line">          name: <span class="string">&quot;son&quot;</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      ],</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">&quot;/app&quot;</span>,</span><br><span class="line">      component: <span class="function">() =&gt;</span></span><br><span class="line">        <span class="keyword">import</span>(<span class="comment">/* webpackChunkName:&quot;app1&quot; */</span> <span class="string">&quot;../pages/application/index.vue&quot;</span>),</span><br><span class="line">      name: <span class="string">&quot;app&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">&quot;/cate&quot;</span>,</span><br><span class="line">      component: <span class="function">() =&gt;</span></span><br><span class="line">        <span class="keyword">import</span>(<span class="comment">/* webpackChunkName:&quot;cate&quot; */</span> <span class="string">&quot;../pages/cate/index.vue&quot;</span>),</span><br><span class="line">      name: <span class="string">&quot;cate&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">&quot;/about&quot;</span>,</span><br><span class="line">      component: <span class="function">() =&gt;</span></span><br><span class="line">        <span class="keyword">import</span>(<span class="comment">/* webpackChunkName:&quot;about&quot; */</span> <span class="string">&quot;../pages/about/index.vue&quot;</span>),</span><br><span class="line">      name: <span class="string">&quot;about&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">&quot;/list&quot;</span>,</span><br><span class="line">      component: <span class="function">() =&gt;</span></span><br><span class="line">        <span class="keyword">import</span>(<span class="comment">/* webpackChunkName:&quot;list&quot; */</span> <span class="string">&quot;../pages/list/index.vue&quot;</span>),</span><br><span class="line">      name: <span class="string">&quot;list&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">&quot;/:pathMatch(.*)*&quot;</span>,</span><br><span class="line">      component: <span class="function">() =&gt;</span></span><br><span class="line">        <span class="keyword">import</span>(</span><br><span class="line">          <span class="comment">/* webpackChunkName:&quot;not-found&quot; */</span> <span class="string">&quot;../pages/not-found/index.vue&quot;</span></span><br><span class="line">        ),</span><br><span class="line">      name: <span class="string">&quot;not-found&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router;</span><br></pre></td></tr></table></figure>
+
+<h4 id="错误路由书写"><a href="#错误路由书写" class="headerlink" title="错误路由书写"></a>错误路由书写</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: <span class="string">&#x27;/:pathMatch(.*)*&#x27;</span>,</span><br><span class="line">    component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName:&quot;not-found&quot; */</span> <span class="string">&#x27;../pages/not-found/index.vue&#x27;</span>),</span><br><span class="line">    name: <span class="string">&#x27;not-found&#x27;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h3 id="一级路由和路由嵌套"><a href="#一级路由和路由嵌套" class="headerlink" title="一级路由和路由嵌套"></a>一级路由和路由嵌套</h3><h4 id="一级路由"><a href="#一级路由" class="headerlink" title="一级路由"></a>一级路由</h4><ol>
+<li>在 App.vue 中</li>
+<li>使用 router-link(这是导航)</li>
+<li>to(声明式跳转链接)</li>
+<li>使用 router-view(这是视图)</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 导航 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;app-nav-list&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/home&quot;</span>&gt;</span> home <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/app&quot;</span>&gt;</span> app <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/cate&quot;</span>&gt;</span> cate <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/about&quot;</span>&gt;</span> about <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/asd&quot;</span>&gt;</span> 404 <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 视图 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">&quot;stylus&quot;</span>&gt;</span></span><br><span class="line">  .app-nav-list</span><br><span class="line"><span class="css">    <span class="attribute">display</span> <span class="attribute">flex</span></span></span><br><span class="line"><span class="css">    <span class="attribute">justify-content</span> space-evenly</span></span><br><span class="line"><span class="css">    <span class="attribute">width</span> <span class="number">500px</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="路由嵌套"><a href="#路由嵌套" class="headerlink" title="路由嵌套"></a>路由嵌套</h4><ol>
+<li>在 src/pages/home/index.vue 中</li>
+<li>路由表即 router 文件夹 index.ts 中 路由要写 children 等数据</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>home<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    &lt;router-link</span><br><span class="line">      :to=&quot;&#123;</span><br><span class="line">        name: &#x27;father&#x27;,</span><br><span class="line">      &#125;&quot;</span><br><span class="line">      &gt;father&lt;/router-link</span><br><span class="line">    &gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    &lt;router-link</span><br><span class="line">      :to=&quot;&#123;</span><br><span class="line">        name: &#x27;son&#x27;,</span><br><span class="line">      &#125;&quot;</span><br><span class="line">      &gt;son&lt;/router-link</span><br><span class="line">    &gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">hr</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="路由监听"><a href="#路由监听" class="headerlink" title="路由监听"></a>路由监听</h3><ol>
+<li>小案例 404 的时候上方导航不见</li>
+<li>通过 navFlag 控制导航的销毁与创建</li>
+<li>引入 useRoute 并实例化 const route = useRoute()</li>
+<li>watch(()=&gt;route.path,()=&gt;{对应的操作}) 来实现监听路由</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineComponent, watch, reactive, toRefs &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useRoute &#125; <span class="keyword">from</span> <span class="string">&quot;vue-router&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> defineComponent(&#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> state = reactive(&#123;</span><br><span class="line">      navFlag: <span class="literal">true</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">const</span> route = useRoute();</span><br><span class="line">    watch(</span><br><span class="line">      () =&gt; route.path,</span><br><span class="line">      () =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (route.matched[<span class="number">0</span>].path === <span class="string">&quot;/:pathMatch(.*)*&quot;</span>) &#123;</span><br><span class="line">          state.navFlag = <span class="literal">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          state.navFlag = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      ...toRefs(state),</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="激活路由"><a href="#激活路由" class="headerlink" title="激活路由"></a>激活路由</h3><ol>
+<li>在 router-link 标签中加 active-class 属性</li>
+<li>切换的时候动态切换类名实现效果</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">active-class</span>=<span class="string">&quot;active&quot;</span> <span class="attr">to</span>=<span class="string">&quot;/home&quot;</span>&gt;</span> home <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="动态路由"><a href="#动态路由" class="headerlink" title="动态路由"></a>动态路由</h3><ol>
+<li>什么是动态路由？<ol>
+<li>url 是变化的，但是呢组件用的是同一个，这就是动态路由</li>
+</ol>
+</li>
+<li>动态传参<ol>
+<li>我们从一个组件中将数据携带在 url 上传递到另一个组件中去</li>
+</ol>
+</li>
+<li>动态接参<ol>
+<li>我们从 url 中获取参数，然后拿到参数之后进行使用【作为请求的参数】</li>
+</ol>
+</li>
+<li>/about/index.vue 中 to 属性书写对象，name,params,query 属性</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- /about/index.vue --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>about<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    &lt;router-link</span><br><span class="line">      :to=&quot;&#123;</span><br><span class="line">        name: &#x27;list&#x27;,</span><br><span class="line">        params: &#123;</span><br><span class="line">          id: 1,</span><br><span class="line">        &#125;,</span><br><span class="line">        query: &#123;</span><br><span class="line">          a: 1,</span><br><span class="line">          b: 1,</span><br><span class="line">          title: &#x27;嘻嘻&#x27;,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;&quot;</span><br><span class="line">      &gt;List&lt;/router-link</span><br><span class="line">    &gt;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>to 中加了 params 中的 id 属性，所以要在 router 文件夹的 index 中编辑</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: <span class="string">&#x27;/list/:id&#x27;</span>, <span class="comment">// 在list中加/:id</span></span><br><span class="line">  component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName:&quot;list&quot; */</span> <span class="string">&#x27;../pages/list/index.vue&#x27;</span>),</span><br><span class="line">  name: <span class="string">&#x27;list&#x27;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在 pages/list/index.vue 接收传过来的参数</li>
+<li>从 vue-router 中引入 useRouter 并在 setup 中实例化</li>
+<li>创建一个 reactive 数据接收参数</li>
+<li>在挂载阶段，从 route.params 或者 route.query 中拿取数据赋值给 reactive 数据</li>
+<li>return</li>
+<li>在 template 中使用数据</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>list<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; id &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; a &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; b &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; title &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> &#123; defineComponent, onMounted, reactive, toRefs &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> &#123; useRoute &#125; <span class="keyword">from</span> <span class="string">&quot;vue-router&quot;</span>;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> defineComponent(&#123;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> route = useRoute();</span></span><br><span class="line"><span class="javascript">      <span class="comment">// console.log(route.params.id);</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> state = reactive(&#123;</span></span><br><span class="line"><span class="javascript">        id: <span class="string">&quot;0&quot;</span>,</span></span><br><span class="line"><span class="javascript">        a: <span class="string">&quot;&quot;</span>,</span></span><br><span class="line"><span class="javascript">        b: <span class="string">&quot;&quot;</span>,</span></span><br><span class="line"><span class="javascript">        title: <span class="string">&quot;&quot;</span>,</span></span><br><span class="line">      &#125;);</span><br><span class="line"><span class="javascript">      onMounted(<span class="function">() =&gt;</span> &#123;</span></span><br><span class="line">        state.id = route.params.id;</span><br><span class="line">        state.a = route.query.a;</span><br><span class="line">        state.b = route.query.b;</span><br><span class="line">        state.title = route.query.title;</span><br><span class="line">      &#125;);</span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line">        ...toRefs(state),</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="命令式跳转页面"><a href="#命令式跳转页面" class="headerlink" title="命令式跳转页面"></a>命令式跳转页面</h3><ol>
+<li>从 vue-router 中引入 useRouter</li>
+<li>router 实例中有 push/replace 方法 里面写路径</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>cate<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hr</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;toAbout&quot;</span>&gt;</span>命令式toabout<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> &#123; defineComponent &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> &#123; useRouter &#125; <span class="keyword">from</span> <span class="string">&quot;vue-router&quot;</span>;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> defineComponent(&#123;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> router = useRouter();</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> toAbout = <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        router.push(<span class="string">&quot;/about&quot;</span>);</span></span><br><span class="line">      &#125;;</span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line">        toAbout,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="路由的追加、删除、路由是否存在的判断"><a href="#路由的追加、删除、路由是否存在的判断" class="headerlink" title="路由的追加、删除、路由是否存在的判断"></a>路由的追加、删除、路由是否存在的判断</h3><h4 id="路由追加"><a href="#路由追加" class="headerlink" title="路由追加"></a>路由追加</h4><ol>
+<li>引入 useRouter</li>
+<li>使用实例 router.addRoute() 里面接收对象，之前怎么写路由就怎么写</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>app<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hr</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;add&quot;</span>&gt;</span>路由追加<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;toNew&quot;</span>&gt;</span>toNew<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> &#123; defineComponent &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> &#123; useRouter &#125; <span class="keyword">from</span> <span class="string">&quot;vue-router&quot;</span>;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> defineComponent(&#123;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> router = useRouter();</span></span><br><span class="line"><span class="javascript">      <span class="comment">// console.log(router);</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> add = <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line">        router.addRoute(&#123;</span><br><span class="line"><span class="javascript">          <span class="comment">// 路由增加</span></span></span><br><span class="line"><span class="javascript">          path: <span class="string">&quot;/new&quot;</span>,</span></span><br><span class="line"><span class="javascript">          component: <span class="function">() =&gt;</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">import</span>(<span class="comment">/* webpackChunkName:&quot;new&quot; */</span> <span class="string">&quot;../new/index.vue&quot;</span>),</span></span><br><span class="line"><span class="javascript">          name: <span class="string">&quot;new&quot;</span>,</span></span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;;</span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> toNew = <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        router.push(<span class="string">&quot;/new&quot;</span>);</span></span><br><span class="line">      &#125;;</span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line">        add,</span><br><span class="line">        toNew,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="路由删除，路由判断"><a href="#路由删除，路由判断" class="headerlink" title="路由删除，路由判断"></a>路由删除，路由判断</h4><ol>
+<li>router.removeRoute(‘RouterName’)</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.removeRoute(<span class="string">&quot;new&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>router.hasRoute(‘RouterName’)</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.hasRoute(<span class="string">&quot;new&quot;</span>); <span class="comment">// 返回布尔值</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>app<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hr</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;add&quot;</span>&gt;</span>路由追加<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;toNew&quot;</span>&gt;</span>toNew<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;rm&quot;</span>&gt;</span>删除new<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;has&quot;</span>&gt;</span>判断是否有new<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> &#123; defineComponent &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> &#123; useRouter &#125; <span class="keyword">from</span> <span class="string">&quot;vue-router&quot;</span>;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> defineComponent(&#123;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> router = useRouter();</span></span><br><span class="line"><span class="javascript">      <span class="comment">// console.log(router);</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> add = <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line">        router.addRoute(&#123;</span><br><span class="line"><span class="javascript">          path: <span class="string">&quot;/new&quot;</span>,</span></span><br><span class="line"><span class="javascript">          component: <span class="function">() =&gt;</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">import</span>(<span class="comment">/* webpackChunkName:&quot;new&quot; */</span> <span class="string">&quot;../new/index.vue&quot;</span>),</span></span><br><span class="line"><span class="javascript">          name: <span class="string">&quot;new&quot;</span>,</span></span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;;</span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> toNew = <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        router.push(<span class="string">&quot;/new&quot;</span>);</span></span><br><span class="line">      &#125;;</span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> rm = <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        router.removeRoute(<span class="string">&quot;new&quot;</span>);</span></span><br><span class="line">      &#125;;</span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> has = <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        router.hasRoute(<span class="string">&quot;new&quot;</span>) ? alert(<span class="string">&quot;yes&quot;</span>) : alert(<span class="string">&quot;no&quot;</span>);</span></span><br><span class="line">      &#125;;</span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line">        add,</span><br><span class="line">        toNew,</span><br><span class="line">        rm,</span><br><span class="line">        has,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="过渡动效"><a href="#过渡动效" class="headerlink" title="过渡动效"></a>过渡动效</h3><ol>
+<li>安装</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add animate.css</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>全局引入,在 main.ts 书写</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.ts</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;animate.css&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>进入 App.vue</li>
+<li>把之前的 router-view 组件用 transtion 组件包裹起来</li>
+<li>transtion 有三个属性</li>
+<li>mode</li>
+<li>enter-active-class</li>
+<li>leave-active-class</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- App.vue --&gt;</span></span><br><span class="line">&lt;transition</span><br><span class="line">  mode=&quot;out-in&quot;</span><br><span class="line">  enter-active-class=&quot;animate__animated animate__fadeInLeft&quot;</span><br><span class="line">  leave-active-class=&quot;animate__animated animate__fadeOutLeft&quot;</span><br><span class="line">&gt;</span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="路由元数据"><a href="#路由元数据" class="headerlink" title="路由元数据"></a>路由元数据</h3><ul>
+<li>我们可以在 routes 中通过 meta 选项来携带一个数据，这个数据可以用来做很多事情，比如<ul>
+<li>头部内容的变化</li>
+<li>面包屑导航</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>在 router 文件夹中修改 about 路由添加 meta 属性</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: <span class="string">&#x27;/about&#x27;</span>,</span><br><span class="line">    component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName:&quot;about&quot; */</span> <span class="string">&#x27;../pages/about/index.vue&#x27;</span>),</span><br><span class="line">    name: <span class="string">&#x27;about&#x27;</span>,</span><br><span class="line">    meta: &#123; <span class="comment">// 这是新增的</span></span><br><span class="line">        title: <span class="string">&#x27;这是关于页面&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>进入 about 组件</li>
+<li>引入 useroute</li>
+<li>route.meta.title 使用</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>about<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 使用数据 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123;&#123; title &#125;&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    &lt;router-link</span><br><span class="line">      :to=&quot;&#123;</span><br><span class="line">        name: &#x27;list&#x27;,</span><br><span class="line">        params: &#123;</span><br><span class="line">          id: 1,</span><br><span class="line">        &#125;,</span><br><span class="line">        query: &#123;</span><br><span class="line">          a: 1,</span><br><span class="line">          b: 1,</span><br><span class="line">          title: &#x27;嘻嘻&#x27;,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;&quot;</span><br><span class="line">      &gt;List&lt;/router-link</span><br><span class="line">    &gt;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> &#123; defineComponent &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> &#123; useRoute &#125; <span class="keyword">from</span> <span class="string">&quot;vue-router&quot;</span>;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> defineComponent(&#123;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> route = useRoute();</span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line">        title: route.meta.title,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="vue-router-中小-tips"><a href="#vue-router-中小-tips" class="headerlink" title="vue-router 中小 tips"></a>vue-router 中小 tips</h3><ol>
+<li>useRoute: 使用数据的时候用它</li>
+<li>useRouter: 使用方法的时候用它</li>
+<li>createRoute: 创建路由的时候用它</li>
+</ol>
+<h3 id="导航守卫"><a href="#导航守卫" class="headerlink" title="导航守卫"></a>导航守卫</h3><ol>
+<li><p>什么是导航守卫</p>
+<ol>
+<li>导航守卫是 vue 提供的用于拦截路由的一种方式</li>
+<li>类比： 停车场的那个起落杆/保安</li>
+</ol>
+</li>
+<li><p>导航守卫的类型</p>
+<ol>
+<li>全局导航守卫【3】<ol>
+<li>全局前置守卫 beforeEach</li>
+<li>全局解析守卫【用法类似全局前置守卫】 beforeResolve</li>
+<li>全局后置守卫 afterEach</li>
+</ol>
+</li>
+<li>路由独享守卫【1】 beforeEnter</li>
+<li>组件级守卫【3】<ol>
+<li>组件内前置守卫 beforeRouteEnter</li>
+<li>组件内更新守卫 beforeRouteUpdate</li>
+<li>组件内后置守卫 beforeRouteLeave</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>令牌： token</p>
+<ol>
+<li>token 的产生： 登录完成之后，后端会返回给我们</li>
+</ol>
+</li>
+<li><p>提供模拟数据的平台</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.fastmock.site/#/">fastmock</a></li>
+</ul>
+</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="http://domain.com/awesome.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vue-router"><span class="toc-number">1.</span> <span class="toc-text">vue-router</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E9%80%A0%E8%B7%AF%E7%94%B1%E5%AE%9E%E4%BE%8B"><span class="toc-number">1.2.</span> <span class="toc-text">打造路由实例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E8%B7%AF%E7%94%B1%E4%B9%A6%E5%86%99"><span class="toc-number">1.2.1.</span> <span class="toc-text">错误路由书写</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%BA%A7%E8%B7%AF%E7%94%B1%E5%92%8C%E8%B7%AF%E7%94%B1%E5%B5%8C%E5%A5%97"><span class="toc-number">1.3.</span> <span class="toc-text">一级路由和路由嵌套</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E7%BA%A7%E8%B7%AF%E7%94%B1"><span class="toc-number">1.3.1.</span> <span class="toc-text">一级路由</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%B5%8C%E5%A5%97"><span class="toc-number">1.3.2.</span> <span class="toc-text">路由嵌套</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E7%9B%91%E5%90%AC"><span class="toc-number">1.4.</span> <span class="toc-text">路由监听</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BF%80%E6%B4%BB%E8%B7%AF%E7%94%B1"><span class="toc-number">1.5.</span> <span class="toc-text">激活路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-number">1.6.</span> <span class="toc-text">动态路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E5%BC%8F%E8%B7%B3%E8%BD%AC%E9%A1%B5%E9%9D%A2"><span class="toc-number">1.7.</span> <span class="toc-text">命令式跳转页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E7%9A%84%E8%BF%BD%E5%8A%A0%E3%80%81%E5%88%A0%E9%99%A4%E3%80%81%E8%B7%AF%E7%94%B1%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E7%9A%84%E5%88%A4%E6%96%AD"><span class="toc-number">1.8.</span> <span class="toc-text">路由的追加、删除、路由是否存在的判断</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E8%BF%BD%E5%8A%A0"><span class="toc-number">1.8.1.</span> <span class="toc-text">路由追加</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%88%A0%E9%99%A4%EF%BC%8C%E8%B7%AF%E7%94%B1%E5%88%A4%E6%96%AD"><span class="toc-number">1.8.2.</span> <span class="toc-text">路由删除，路由判断</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%B8%A1%E5%8A%A8%E6%95%88"><span class="toc-number">1.9.</span> <span class="toc-text">过渡动效</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-number">1.10.</span> <span class="toc-text">路由元数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vue-router-%E4%B8%AD%E5%B0%8F-tips"><span class="toc-number">1.11.</span> <span class="toc-text">vue-router 中小 tips</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB"><span class="toc-number">1.12.</span> <span class="toc-text">导航守卫</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
