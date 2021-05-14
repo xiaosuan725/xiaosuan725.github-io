@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>React reduex - Mr.Chen</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="cheerless,"> 
+    <meta name="description" content="redux 实现
+安装额外插件
+以 redux-xxx 命名的都是 redux 中间件，用于实现特定功能的一个函数
+
+
+
+1234$ yarn add redux react-redux redux,"> 
+    <meta name="author" content="Xiao Suan"> 
+    <link rel="alternative" href="atom.xml" title="Mr.Chen" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Mr.Chen</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://cheerless.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">React reduex</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">React reduex</h1>
+        <div class="stuff">
+            <span>一月 24, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/react/" rel="tag">react</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="redux-实现"><a href="#redux-实现" class="headerlink" title="redux 实现"></a>redux 实现</h2><ol>
+<li>安装额外插件<blockquote>
+<p>以 redux-xxx 命名的都是 redux 中间件，用于实现特定功能的一个函数</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add redux react-redux redux-thunk</span><br><span class="line"><span class="comment"># redux 构建redux架构</span></span><br><span class="line"><span class="comment"># react-redux 用户数据划分</span></span><br><span class="line"><span class="comment"># redux-thunk 异步数据交互[ 处理前后端交互 ]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="打造-reducer"><a href="#打造-reducer" class="headerlink" title="打造 reducer"></a>打造 reducer</h3><p>src 下创建 reducers/index.ts</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 打造reducers</span></span><br><span class="line"><span class="keyword">import</span> &#123; combineReducers &#125; <span class="keyword">from</span> <span class="string">&quot;redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> homeReducer <span class="keyword">from</span> <span class="string">&quot;./homeReducer&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rootReducer 统一管理项目中的所有reducer</span></span><br><span class="line"><span class="keyword">const</span> rootReducer = combineReducers(&#123;</span><br><span class="line">  <span class="comment">// 数据名: reducer</span></span><br><span class="line">  home: homeReducer,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> rootReducer;</span><br></pre></td></tr></table></figure>
+
+<h4 id="combineReducers"><a href="#combineReducers" class="headerlink" title="combineReducers"></a>combineReducers</h4><blockquote>
+<p>合并 Reducers<br>combineReducers({数据名: reducer,数据名: reducer,…})</p>
+</blockquote>
+<h4 id="额外创建子-Reducer"><a href="#额外创建子-Reducer" class="headerlink" title="额外创建子 Reducer"></a>额外创建子 Reducer</h4><ol>
+<li>初始化数据</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> initState = &#123;</span><br><span class="line">  hotList: [],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>定义一个 Reducer 函数<ul>
+<li>参数 state 就是数据</li>
+<li>action 就是一个对象，由 actionCreators 发过来的</li>
+<li>Reducer 一定有返回值，返回一个新的 state</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> homeReducer = <span class="function">(<span class="params">state = initState, action: <span class="built_in">any</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="keyword">return</span> &#123; ...state &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>导出</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> homeReducer;</span><br></pre></td></tr></table></figure>
+
+<h3 id="打造-store"><a href="#打造-store" class="headerlink" title="打造 store"></a>打造 store</h3><p>src 下创建 models/index.ts</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用于打造redux构成之一 store</span></span><br><span class="line"><span class="keyword">import</span> &#123; createStore, applyMiddleware &#125; <span class="keyword">from</span> <span class="string">&quot;redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> thunk <span class="keyword">from</span> <span class="string">&quot;redux-thunk&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> rootReducer <span class="keyword">from</span> <span class="string">&quot;../reducers&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// const store = createStore(rootReducer,中间件执行函数)</span></span><br><span class="line"><span class="keyword">const</span> store = createStore(rootReducer, applyMiddleware(thunk));</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store;</span><br></pre></td></tr></table></figure>
+
+<h4 id="createStore-applyMiddleware-thunk"><a href="#createStore-applyMiddleware-thunk" class="headerlink" title="createStore + applyMiddleware + thunk"></a>createStore + applyMiddleware + thunk</h4><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// createStore(根Reducer,中间件执行函数)</span></span><br><span class="line">createStore(rootReducer, applyMiddleware(thunk));</span><br></pre></td></tr></table></figure>
+
+<h3 id="Provider-跨组件通信"><a href="#Provider-跨组件通信" class="headerlink" title="Provider 跨组件通信"></a>Provider 跨组件通信</h3><blockquote>
+<p>使用跨组件通信的方法将 store 的数据给所有的组件</p>
+</blockquote>
+<ol>
+<li>进入 src 目录的 index.tsx 文件从 react-redux 中引入 Provider</li>
+<li>Provider 有个 store 属性 所以需要引入 store 文件</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.tsx</span></span><br><span class="line"><span class="keyword">import</span> &#123; Provider &#125; <span class="keyword">from</span> <span class="string">&quot;react-redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&quot;./models&quot;</span>;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">&lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">  &lt;App /&gt;</span><br><span class="line">&lt;/Provider&gt;;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="创建-src-service-index-ts-可有可无"><a href="#创建-src-service-index-ts-可有可无" class="headerlink" title="创建 src/service/index.ts(可有可无)"></a>创建 src/service/index.ts(可有可无)</h3><p>写数据请求的</p>
+<h3 id="创建-src-actions-index-ts"><a href="#创建-src-actions-index-ts" class="headerlink" title="创建 src/actions/index.ts"></a>创建 src/actions/index.ts</h3><p>写动作的</p>
+<h3 id="在组件获取数据"><a href="#在组件获取数据" class="headerlink" title="在组件获取数据"></a>在组件获取数据</h3><p>组件需要通过一个叫做【connect 的返回值】的高阶组件来获取 store 中的数据</p>
+<h4 id="connect-bindActionCreators"><a href="#connect-bindActionCreators" class="headerlink" title="connect + bindActionCreators"></a>connect + bindActionCreators</h4><ol>
+<li>connect(callback1,callback2)(组件) 有两个回掉函数<ul>
+<li>第一个参数用于获取 store 的 state<ul>
+<li>state 参数</li>
+<li>return state.xxx</li>
+</ul>
+</li>
+<li>第二个参数是用于获取 redux 的 actionCreators 中的创建动作的方法的<ul>
+<li>dispatch 参数</li>
+<li>return bindActionCreators(动作,dispatch)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 案例</span></span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">&quot;react-redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; bindActionCreators &#125; <span class="keyword">from</span> <span class="string">&quot;redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> homeActions <span class="keyword">from</span> <span class="string">&quot;../../actions/homeActions&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(</span><br><span class="line">  (state: &#123; <span class="attr">home</span>: &#123;&#125; &#125;) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;state&quot;</span>, state); <span class="comment">// state是整个应用的数据,里面的home是划分出来的数据</span></span><br><span class="line">    <span class="keyword">return</span> state.home;</span><br><span class="line">  &#125;,</span><br><span class="line">  (dispatch) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> bindActionCreators(homeActions, dispatch);</span><br><span class="line">  &#125;</span><br><span class="line">)(Hot);</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="http://domain.com/awesome.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#redux-%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.</span> <span class="toc-text">redux 实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E9%80%A0-reducer"><span class="toc-number">1.1.</span> <span class="toc-text">打造 reducer</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#combineReducers"><span class="toc-number">1.1.1.</span> <span class="toc-text">combineReducers</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%9D%E5%A4%96%E5%88%9B%E5%BB%BA%E5%AD%90-Reducer"><span class="toc-number">1.1.2.</span> <span class="toc-text">额外创建子 Reducer</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E9%80%A0-store"><span class="toc-number">1.2.</span> <span class="toc-text">打造 store</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#createStore-applyMiddleware-thunk"><span class="toc-number">1.2.1.</span> <span class="toc-text">createStore + applyMiddleware + thunk</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Provider-%E8%B7%A8%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="toc-number">1.3.</span> <span class="toc-text">Provider 跨组件通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-src-service-index-ts-%E5%8F%AF%E6%9C%89%E5%8F%AF%E6%97%A0"><span class="toc-number">1.4.</span> <span class="toc-text">创建 src&#x2F;service&#x2F;index.ts(可有可无)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-src-actions-index-ts"><span class="toc-number">1.5.</span> <span class="toc-text">创建 src&#x2F;actions&#x2F;index.ts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E7%BB%84%E4%BB%B6%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-number">1.6.</span> <span class="toc-text">在组件获取数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#connect-bindActionCreators"><span class="toc-number">1.6.1.</span> <span class="toc-text">connect + bindActionCreators</span></a></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
