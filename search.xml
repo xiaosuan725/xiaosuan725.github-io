@@ -28,6 +28,29 @@
       </tags>
   </entry>
   <entry>
+    <title>Git 基础命令</title>
+    <url>/2020/06/13/gitbash/</url>
+    <content><![CDATA[<h1 id="Git-入门"><a href="#Git-入门" class="headerlink" title="Git 入门"></a>Git 入门</h1><p>Git 是目前世界上最先进的分布式版本控制系统。</p>
+<h3 id="本地仓库"><a href="#本地仓库" class="headerlink" title="本地仓库"></a>本地仓库</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建本地仓库</span></span><br><span class="line">$ git init</span><br><span class="line">$ ls -ah <span class="comment"># 查看隐藏的.git文件夹</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交到暂存区</span></span><br><span class="line">$ git add &lt;fileName&gt;</span><br><span class="line">$ git add . <span class="comment"># 添加全部</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交到仓库</span></span><br><span class="line">$ git commit -m <span class="string">&quot;描述内容&quot;</span> <span class="comment">#将暂存区的内容一次性提交到仓库</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看仓库当前状态</span></span><br><span class="line">$ git status</span><br></pre></td></tr></table></figure>
+
+<h3 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建SSH Key</span></span><br><span class="line">$ ssh-keygen -t rsa -C <span class="string">&quot;邮箱地址&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地关联远程库</span></span><br><span class="line">$ git remote add origin 远程库地址</span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地内容推送到远程库</span></span><br><span class="line">$ git push -u origin master <span class="comment"># 第一次推送要加-u 参数 推荐已存在项目上传</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆远程库到本地</span></span><br><span class="line">$ git <span class="built_in">clone</span> 远程库地址 <span class="comment"># 推荐新建项目，每人拉取</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看远程库</span></span><br><span class="line">$ git remote</span><br><span class="line"><span class="comment"># 或者 $ git remote -v</span></span><br><span class="line"><span class="comment"># 查看更详细信息</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a>标签管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建新标签</span></span><br><span class="line">$ git tag &lt;name&gt; <span class="comment"># 默认新建在最新提交的commit上</span></span><br><span class="line">$ git tag &lt;name&gt; <span class="comment"># 或对制定版本号打标签</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有标签</span></span><br><span class="line">$ git tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看指定标签信息</span></span><br><span class="line">$ git show &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除标签</span></span><br><span class="line">$ git tag -d &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签推送到远程</span></span><br><span class="line">$ git push origin &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送全部标签</span></span><br><span class="line">$ git push origin --tags</span><br></pre></td></tr></table></figure>
+
+<h3 id="版本回退与管理"><a href="#版本回退与管理" class="headerlink" title="版本回退与管理"></a>版本回退与管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看修改的内容</span></span><br><span class="line">$ git diff</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看历史版本</span></span><br><span class="line">$ git <span class="built_in">log</span></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$ git <span class="built_in">log</span> --pretty=oneline <span class="comment"># 只看版本号和描述内容</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退到上个版本</span></span><br><span class="line">$ git reset --hard HEAD^</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退上上个版本</span></span><br><span class="line">$ git reset --hard HEAD^^</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退上N个版本</span></span><br><span class="line">$ git reset --hard HEAD-N</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退或前进到指定版本</span></span><br><span class="line">$ git reset --hard xxxx(<span class="built_in">hash</span>前6位)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看之前的命令</span></span><br><span class="line">$ git reflog <span class="comment"># 可查看回退之后找不到的版本号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 丢弃工作区的修改</span></span><br><span class="line">$ git checkout -- &lt;fileName&gt;</span><br><span class="line"><span class="comment"># 若没放到暂存区，现在，撤销到和版本库一样</span></span><br><span class="line"><span class="comment"># 若已添加到暂存区，撤销到和咱去存一样</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 确定删除文件</span></span><br><span class="line">$ git rm &lt;fileName&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复删除文件</span></span><br><span class="line">$ git checkout -- &lt;fileName&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建分支</span></span><br><span class="line">$ git branch 分支名</span><br><span class="line"><span class="comment"># $ git checkout -b 相当于创建并切换</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换分支</span></span><br><span class="line">$ git checkout 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看分支</span></span><br><span class="line">$ git branch <span class="comment"># 当前分支前面会加上*</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 分支合并</span></span><br><span class="line">$ git merge 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支</span></span><br><span class="line">$ git branch -d 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 冲突解决</span></span><br><span class="line"><span class="comment"># 手动修改保存后再提交</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看分支合并图</span></span><br><span class="line">$ git <span class="built_in">log</span> --graph</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取消快进模式</span></span><br><span class="line">$ git merge --no-ff -m <span class="string">&quot;描述信息&quot;</span> dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 存储当前内容</span></span><br><span class="line">$ git stash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复存储</span></span><br><span class="line">$ git stash pop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送分支</span></span><br><span class="line">$ git push origin 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建远程分支到本地</span></span><br><span class="line">$ git checkout -b 分支名 origin/分支名</span><br></pre></td></tr></table></figure>
+
+<h3 id="奇怪但有用的命令"><a href="#奇怪但有用的命令" class="headerlink" title="奇怪但有用的命令"></a>奇怪但有用的命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git pull origin master --allow-unrelated-histories</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Typescript 学习笔记</title>
     <url>/2020/04/08/ts1/</url>
     <content><![CDATA[<h3 id="js-的原生类型"><a href="#js-的原生类型" class="headerlink" title="js 的原生类型"></a>js 的原生类型</h3><ol>
@@ -144,55 +167,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Git 基础命令</title>
-    <url>/2020/06/13/gitbash/</url>
-    <content><![CDATA[<h1 id="Git-入门"><a href="#Git-入门" class="headerlink" title="Git 入门"></a>Git 入门</h1><p>Git 是目前世界上最先进的分布式版本控制系统。</p>
-<h3 id="本地仓库"><a href="#本地仓库" class="headerlink" title="本地仓库"></a>本地仓库</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建本地仓库</span></span><br><span class="line">$ git init</span><br><span class="line">$ ls -ah <span class="comment"># 查看隐藏的.git文件夹</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交到暂存区</span></span><br><span class="line">$ git add &lt;fileName&gt;</span><br><span class="line">$ git add . <span class="comment"># 添加全部</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交到仓库</span></span><br><span class="line">$ git commit -m <span class="string">&quot;描述内容&quot;</span> <span class="comment">#将暂存区的内容一次性提交到仓库</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看仓库当前状态</span></span><br><span class="line">$ git status</span><br></pre></td></tr></table></figure>
-
-<h3 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建SSH Key</span></span><br><span class="line">$ ssh-keygen -t rsa -C <span class="string">&quot;邮箱地址&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地关联远程库</span></span><br><span class="line">$ git remote add origin 远程库地址</span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地内容推送到远程库</span></span><br><span class="line">$ git push -u origin master <span class="comment"># 第一次推送要加-u 参数 推荐已存在项目上传</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆远程库到本地</span></span><br><span class="line">$ git <span class="built_in">clone</span> 远程库地址 <span class="comment"># 推荐新建项目，每人拉取</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看远程库</span></span><br><span class="line">$ git remote</span><br><span class="line"><span class="comment"># 或者 $ git remote -v</span></span><br><span class="line"><span class="comment"># 查看更详细信息</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a>标签管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建新标签</span></span><br><span class="line">$ git tag &lt;name&gt; <span class="comment"># 默认新建在最新提交的commit上</span></span><br><span class="line">$ git tag &lt;name&gt; <span class="comment"># 或对制定版本号打标签</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有标签</span></span><br><span class="line">$ git tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看指定标签信息</span></span><br><span class="line">$ git show &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除标签</span></span><br><span class="line">$ git tag -d &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签推送到远程</span></span><br><span class="line">$ git push origin &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送全部标签</span></span><br><span class="line">$ git push origin --tags</span><br></pre></td></tr></table></figure>
-
-<h3 id="版本回退与管理"><a href="#版本回退与管理" class="headerlink" title="版本回退与管理"></a>版本回退与管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看修改的内容</span></span><br><span class="line">$ git diff</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看历史版本</span></span><br><span class="line">$ git <span class="built_in">log</span></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$ git <span class="built_in">log</span> --pretty=oneline <span class="comment"># 只看版本号和描述内容</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退到上个版本</span></span><br><span class="line">$ git reset --hard HEAD^</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退上上个版本</span></span><br><span class="line">$ git reset --hard HEAD^^</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退上N个版本</span></span><br><span class="line">$ git reset --hard HEAD-N</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退或前进到指定版本</span></span><br><span class="line">$ git reset --hard xxxx(<span class="built_in">hash</span>前6位)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看之前的命令</span></span><br><span class="line">$ git reflog <span class="comment"># 可查看回退之后找不到的版本号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 丢弃工作区的修改</span></span><br><span class="line">$ git checkout -- &lt;fileName&gt;</span><br><span class="line"><span class="comment"># 若没放到暂存区，现在，撤销到和版本库一样</span></span><br><span class="line"><span class="comment"># 若已添加到暂存区，撤销到和咱去存一样</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 确定删除文件</span></span><br><span class="line">$ git rm &lt;fileName&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复删除文件</span></span><br><span class="line">$ git checkout -- &lt;fileName&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建分支</span></span><br><span class="line">$ git branch 分支名</span><br><span class="line"><span class="comment"># $ git checkout -b 相当于创建并切换</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换分支</span></span><br><span class="line">$ git checkout 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看分支</span></span><br><span class="line">$ git branch <span class="comment"># 当前分支前面会加上*</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 分支合并</span></span><br><span class="line">$ git merge 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支</span></span><br><span class="line">$ git branch -d 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 冲突解决</span></span><br><span class="line"><span class="comment"># 手动修改保存后再提交</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看分支合并图</span></span><br><span class="line">$ git <span class="built_in">log</span> --graph</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取消快进模式</span></span><br><span class="line">$ git merge --no-ff -m <span class="string">&quot;描述信息&quot;</span> dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 存储当前内容</span></span><br><span class="line">$ git stash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复存储</span></span><br><span class="line">$ git stash pop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送分支</span></span><br><span class="line">$ git push origin 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建远程分支到本地</span></span><br><span class="line">$ git checkout -b 分支名 origin/分支名</span><br></pre></td></tr></table></figure>
-
-<h3 id="奇怪但有用的命令"><a href="#奇怪但有用的命令" class="headerlink" title="奇怪但有用的命令"></a>奇怪但有用的命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git pull origin master --allow-unrelated-histories</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS SPA单页面应用(原理)</title>
-    <url>/2020/04/08/js/SPA/</url>
-    <content><![CDATA[<h1 id="SPA"><a href="#SPA" class="headerlink" title="SPA"></a>SPA</h1><p>单页面应用</p>
-<ol>
-<li>网易云音乐</li>
-<li>饿了吗</li>
-<li>美团</li>
-</ol>
-<hr>
-<p>构建基本的页面</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#/index&quot;</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#/my&quot;</span>&gt;</span>我的<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#/music&quot;</span>&gt;</span>音乐<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#/user&quot;</span>&gt;</span>用户<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#/news&quot;</span>&gt;</span>新闻<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;main&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="attribute">list-style-type</span>: none;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">80%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">li</span> &#123;</span><br><span class="line">  <span class="attribute">float</span>: left;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">5px</span> <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#main</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">80%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">3em</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>SPA 不用因为用户的操作而进行页面的重新加载或跳转，而是利用 JavaScript 动态的变换 HTML，从而实现 UI 与用户的交互</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// hashchange 锚点改变 事件</span></span><br><span class="line"><span class="comment">// VUE.js 路由原理</span></span><br><span class="line"><span class="built_in">window</span>.onhashchange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> main = <span class="built_in">document</span>.getElementById(<span class="string">&quot;main&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">switch</span> (location.hash) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;#/index&quot;</span>:</span><br><span class="line">      main.innerHTML = <span class="string">&quot;首页&quot;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;#/my&quot;</span>:</span><br><span class="line">      main.innerHTML = <span class="string">&quot;我的&quot;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;#/music&quot;</span>:</span><br><span class="line">      main.innerHTML = <span class="string">&quot;音乐&quot;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;#/user&quot;</span>:</span><br><span class="line">      main.innerHTML = <span class="string">&quot;用户&quot;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;#/news&quot;</span>:</span><br><span class="line">      main.innerHTML = <span class="string">&quot;新闻&quot;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>js</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Css 弹性盒子</title>
     <url>/2020/02/01/css/flex/</url>
     <content><![CDATA[<h2 id="FLEX-布局"><a href="#FLEX-布局" class="headerlink" title="FLEX 布局"></a>FLEX 布局</h2><blockquote>
@@ -237,38 +211,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JS Set和Map数据结构</title>
-    <url>/2020/05/12/js/SetandMap/</url>
-    <content><![CDATA[<h2 id="Set-和-Map-数据结构"><a href="#Set-和-Map-数据结构" class="headerlink" title="Set 和 Map 数据结构"></a>Set 和 Map 数据结构</h2><h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><blockquote>
-<p>ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。</p>
-</blockquote>
-<h4 id="属性和方法"><a href="#属性和方法" class="headerlink" title="属性和方法"></a>属性和方法</h4><ol>
-<li>Set.protitype.size 返回 Set 实例成员总数</li>
-<li>Set.protitype.add(value) 给 Set 添加某个值，返回 Set 结构本身</li>
-<li>Set.protitype.delete(value) 删除某个值，返回布尔值，表示是否删除成功</li>
-<li>Set.protitype.has(value) 返回一个布尔值，表示是否为 Set 成员</li>
-<li>Set.protitype.clear() 清除所有成员，没有返回值</li>
-</ol>
-<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><blockquote>
-<p>Map 提供了”值-&gt;值”的对应</p>
-</blockquote>
-<h4 id="属性和方法-1"><a href="#属性和方法-1" class="headerlink" title="属性和方法"></a>属性和方法</h4><ol>
-<li>Map.protitype.size</li>
-<li>Map.protitype.set(key,value)</li>
-<li>Map.protitype.get(key)</li>
-<li>Map.protitype.has(key)</li>
-<li>Map.protitype.delete(key)</li>
-<li>Map.protitype.clear()</li>
-</ol>
-]]></content>
-      <categories>
-        <category>js</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Css 媒体查询 移动端适配</title>
     <url>/2020/08/08/css/media/</url>
     <content><![CDATA[<h2 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h2><blockquote>
@@ -306,6 +248,76 @@
       </tags>
   </entry>
   <entry>
+    <title>JS SPA单页面应用(原理)</title>
+    <url>/2020/04/08/js/SPA/</url>
+    <content><![CDATA[<h1 id="SPA"><a href="#SPA" class="headerlink" title="SPA"></a>SPA</h1><p>单页面应用</p>
+<ol>
+<li>网易云音乐</li>
+<li>饿了吗</li>
+<li>美团</li>
+</ol>
+<hr>
+<p>构建基本的页面</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#/index&quot;</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#/my&quot;</span>&gt;</span>我的<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#/music&quot;</span>&gt;</span>音乐<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#/user&quot;</span>&gt;</span>用户<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#/news&quot;</span>&gt;</span>新闻<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;main&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="attribute">list-style-type</span>: none;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">80%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">li</span> &#123;</span><br><span class="line">  <span class="attribute">float</span>: left;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">5px</span> <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#main</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">80%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">3em</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>SPA 不用因为用户的操作而进行页面的重新加载或跳转，而是利用 JavaScript 动态的变换 HTML，从而实现 UI 与用户的交互</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// hashchange 锚点改变 事件</span></span><br><span class="line"><span class="comment">// VUE.js 路由原理</span></span><br><span class="line"><span class="built_in">window</span>.onhashchange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> main = <span class="built_in">document</span>.getElementById(<span class="string">&quot;main&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">switch</span> (location.hash) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;#/index&quot;</span>:</span><br><span class="line">      main.innerHTML = <span class="string">&quot;首页&quot;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;#/my&quot;</span>:</span><br><span class="line">      main.innerHTML = <span class="string">&quot;我的&quot;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;#/music&quot;</span>:</span><br><span class="line">      main.innerHTML = <span class="string">&quot;音乐&quot;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;#/user&quot;</span>:</span><br><span class="line">      main.innerHTML = <span class="string">&quot;用户&quot;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;#/news&quot;</span>:</span><br><span class="line">      main.innerHTML = <span class="string">&quot;新闻&quot;</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>js</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS Set和Map数据结构</title>
+    <url>/2020/05/12/js/SetandMap/</url>
+    <content><![CDATA[<h2 id="Set-和-Map-数据结构"><a href="#Set-和-Map-数据结构" class="headerlink" title="Set 和 Map 数据结构"></a>Set 和 Map 数据结构</h2><h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><blockquote>
+<p>ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。</p>
+</blockquote>
+<h4 id="属性和方法"><a href="#属性和方法" class="headerlink" title="属性和方法"></a>属性和方法</h4><ol>
+<li>Set.protitype.size 返回 Set 实例成员总数</li>
+<li>Set.protitype.add(value) 给 Set 添加某个值，返回 Set 结构本身</li>
+<li>Set.protitype.delete(value) 删除某个值，返回布尔值，表示是否删除成功</li>
+<li>Set.protitype.has(value) 返回一个布尔值，表示是否为 Set 成员</li>
+<li>Set.protitype.clear() 清除所有成员，没有返回值</li>
+</ol>
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><blockquote>
+<p>Map 提供了”值-&gt;值”的对应</p>
+</blockquote>
+<h4 id="属性和方法-1"><a href="#属性和方法-1" class="headerlink" title="属性和方法"></a>属性和方法</h4><ol>
+<li>Map.protitype.size</li>
+<li>Map.protitype.set(key,value)</li>
+<li>Map.protitype.get(key)</li>
+<li>Map.protitype.has(key)</li>
+<li>Map.protitype.delete(key)</li>
+<li>Map.protitype.clear()</li>
+</ol>
+]]></content>
+      <categories>
+        <category>js</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS cookie的封装</title>
+    <url>/2020/04/06/js/cookie/</url>
+    <content><![CDATA[<h2 id="封装了一个-cookie"><a href="#封装了一个-cookie" class="headerlink" title="封装了一个 cookie"></a>封装了一个 cookie</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cookie = &#123;</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params">key</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.cookie) &#123;</span><br><span class="line">      <span class="keyword">let</span> cookies = <span class="built_in">document</span>.cookie.split(<span class="string">&quot;; &quot;</span>);</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> cookies) &#123;</span><br><span class="line">        <span class="keyword">let</span> item = cookies[i].split(<span class="string">&quot;=&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (item[<span class="number">0</span>] === key) &#123;</span><br><span class="line">          <span class="keyword">return</span> item[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span>; <span class="comment">// 遍历结束没有cookie 返回空字符串</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">set</span>(<span class="params">key, value, day</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> day === <span class="string">&quot;number&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> d = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">      d.setDate(d.getDate() + day);</span><br><span class="line">      <span class="built_in">document</span>.cookie = <span class="string">`<span class="subst">$&#123;key&#125;</span>=<span class="subst">$&#123;value&#125;</span>;path=/;expires=<span class="subst">$&#123;d&#125;</span>`</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">document</span>.cookie = <span class="string">`<span class="subst">$&#123;key&#125;</span>=<span class="subst">$&#123;value&#125;</span>;path=/`</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">remove</span>(<span class="params">key</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.set(key, <span class="string">&quot;&quot;</span>, -<span class="number">1</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>js</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JS 防抖和节流</title>
     <url>/2020/04/07/js/debounce/</url>
     <content><![CDATA[<h3 id="函数防抖"><a href="#函数防抖" class="headerlink" title="函数防抖"></a>函数防抖</h3><blockquote>
@@ -331,18 +343,6 @@
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 节流(非立即执行)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">callback, delay</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> flag = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> _this = <span class="built_in">this</span>;</span><br><span class="line">    <span class="keyword">let</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">    <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">      flag = <span class="literal">false</span>;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        callback.apply(_this, args);</span><br><span class="line">        flag = <span class="literal">true</span>;</span><br><span class="line">      &#125;, delay);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 节流(立即执行)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">callback, delay</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> flag = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> _this = <span class="built_in">this</span>;</span><br><span class="line">    <span class="keyword">let</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">    <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">      callback.apply(_this, args);</span><br><span class="line">      flag = <span class="literal">false</span>;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        flag = <span class="literal">true</span>;</span><br><span class="line">      &#125;, delay);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>js</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS cookie的封装</title>
-    <url>/2020/04/06/js/cookie/</url>
-    <content><![CDATA[<h2 id="封装了一个-cookie"><a href="#封装了一个-cookie" class="headerlink" title="封装了一个 cookie"></a>封装了一个 cookie</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cookie = &#123;</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params">key</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.cookie) &#123;</span><br><span class="line">      <span class="keyword">let</span> cookies = <span class="built_in">document</span>.cookie.split(<span class="string">&quot;; &quot;</span>);</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> cookies) &#123;</span><br><span class="line">        <span class="keyword">let</span> item = cookies[i].split(<span class="string">&quot;=&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (item[<span class="number">0</span>] === key) &#123;</span><br><span class="line">          <span class="keyword">return</span> item[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span>; <span class="comment">// 遍历结束没有cookie 返回空字符串</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">set</span>(<span class="params">key, value, day</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> day === <span class="string">&quot;number&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> d = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">      d.setDate(d.getDate() + day);</span><br><span class="line">      <span class="built_in">document</span>.cookie = <span class="string">`<span class="subst">$&#123;key&#125;</span>=<span class="subst">$&#123;value&#125;</span>;path=/;expires=<span class="subst">$&#123;d&#125;</span>`</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">document</span>.cookie = <span class="string">`<span class="subst">$&#123;key&#125;</span>=<span class="subst">$&#123;value&#125;</span>;path=/`</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">remove</span>(<span class="params">key</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.set(key, <span class="string">&quot;&quot;</span>, -<span class="number">1</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>js</category>
@@ -1091,121 +1091,6 @@
       </tags>
   </entry>
   <entry>
-    <title>React reduex</title>
-    <url>/2021/01/24/react/redux/</url>
-    <content><![CDATA[<h2 id="redux-实现"><a href="#redux-实现" class="headerlink" title="redux 实现"></a>redux 实现</h2><ol>
-<li>安装额外插件</li>
-</ol>
-<blockquote>
-<p>以 redux-xxx 命名的都是 redux 中间件，用于实现特定功能的一个函数</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yarn add redux react-redux redux-thunk</span><br><span class="line"><span class="comment"># redux 构建redux架构</span></span><br><span class="line"><span class="comment"># react-redux 用户数据划分</span></span><br><span class="line"><span class="comment"># redux-thunk 异步数据交互[ 处理前后端交互 ]</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="打造-reducer"><a href="#打造-reducer" class="headerlink" title="打造 reducer"></a>打造 reducer</h3><ol>
-<li>src 下创建 reducers/index.ts</li>
-<li>从 redux 引入 combineReducers</li>
-<li>导出 rootReducer</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 打造reducers</span></span><br><span class="line"><span class="keyword">import</span> &#123; combineReducers &#125; <span class="keyword">from</span> <span class="string">&quot;redux&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rootReducer 统一管理项目中的所有reducer</span></span><br><span class="line"><span class="keyword">const</span> rootReducer = combineReducers(&#123;</span><br><span class="line">  <span class="comment">// 数据名: reducer</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> rootReducer;</span><br></pre></td></tr></table></figure>
-
-<h4 id="combineReducers"><a href="#combineReducers" class="headerlink" title="combineReducers"></a>combineReducers</h4><p>用于合并 reducer</p>
-<h3 id="打造-store"><a href="#打造-store" class="headerlink" title="打造 store"></a>打造 store</h3><ol>
-<li>src 下创建 models/index.ts</li>
-<li>从 redux 中引入 createStore, applyMiddleware</li>
-<li>从 redux-thunk 引入 thunk</li>
-<li>引入刚才打造的 rootReducer</li>
-<li>导出</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 用于打造redux构成之一 store</span></span><br><span class="line"><span class="keyword">import</span> &#123; createStore, applyMiddleware &#125; <span class="keyword">from</span> <span class="string">&quot;redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> thunk <span class="keyword">from</span> <span class="string">&quot;redux-thunk&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> rootReducer <span class="keyword">from</span> <span class="string">&quot;../reducers&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// const store = createStore(rootReducer,中间件执行函数)</span></span><br><span class="line"><span class="keyword">const</span> store = createStore(rootReducer, applyMiddleware(thunk));</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store;</span><br></pre></td></tr></table></figure>
-
-<h4 id="createStore-applyMiddleware-thunk"><a href="#createStore-applyMiddleware-thunk" class="headerlink" title="createStore + applyMiddleware + thunk"></a>createStore + applyMiddleware + thunk</h4><figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// createStore(根Reducer,中间件执行函数)</span></span><br><span class="line">createStore(rootReducer, applyMiddleware(thunk));</span><br></pre></td></tr></table></figure>
-
-<h3 id="Provider-跨组件通信"><a href="#Provider-跨组件通信" class="headerlink" title="Provider 跨组件通信"></a>Provider 跨组件通信</h3><blockquote>
-<p>使用跨组件通信的方法将 store 的数据给所有的组件</p>
-</blockquote>
-<ol>
-<li>进入 src 目录的 index.tsx 文件从 react-redux 中引入 Provider</li>
-<li>Provider 有个 store 属性 所以需要引入 store 文件</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// index.tsx</span></span><br><span class="line"><span class="keyword">import</span> &#123; Provider &#125; <span class="keyword">from</span> <span class="string">&quot;react-redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&quot;./models&quot;</span>;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">&lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">  &lt;App /&gt;</span><br><span class="line">&lt;/Provider&gt;;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="创建-子-reducer"><a href="#创建-子-reducer" class="headerlink" title="创建 子 reducer"></a>创建 子 reducer</h3><ol>
-<li>初始化数据 initState</li>
-<li>定义一个 Reducer 函数<ul>
-<li>参数 state 就是数据</li>
-<li>action 就是一个对象，由 actionCreators 发过来的</li>
-<li>Reducer 一定有返回值，返回一个新的 state</li>
-</ul>
-</li>
-<li>导出</li>
-<li>在 rootReducer 中引入</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> initState = &#123;</span><br><span class="line">  hotList: [],</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hotReducer = <span class="function">(<span class="params">state = initState, action: <span class="built_in">any</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123; ...state &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> hotReducer;</span><br></pre></td></tr></table></figure>
-
-<h3 id="在组件获取数据"><a href="#在组件获取数据" class="headerlink" title="在组件获取数据"></a>在组件获取数据</h3><ol>
-<li>组件需要通过一个叫做【connect 的返回值】的高阶组件来获取 store 中的数据</li>
-<li>通过第一个回调函数的参数 state 获取数据,state 是全部数据，需要 return state.xxx, 并且需要给 state 赋予类型</li>
-<li>组件就可以通过 props 得到数据</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">&quot;react-redux&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> P &#123;</span><br><span class="line">  hotList: &#123; [key: <span class="built_in">string</span>]: <span class="built_in">any</span> &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Hot</span>(<span class="params">props: P</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(<span class="function">(<span class="params">state: &#123; hot: &#123;&#125; &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// console.log(state); // state是全局的数据</span></span><br><span class="line">  <span class="keyword">return</span> state.hot;</span><br><span class="line">&#125;)(Hot);</span><br></pre></td></tr></table></figure>
-
-<h4 id="connect-bindActionCreators"><a href="#connect-bindActionCreators" class="headerlink" title="connect + bindActionCreators"></a>connect + bindActionCreators</h4><ol>
-<li>connect(callback1,callback2)(组件) 有两个回掉函数<ul>
-<li>第一个参数用于获取 store 的 state<ul>
-<li>state 参数</li>
-<li>return state.xxx</li>
-</ul>
-</li>
-<li>第二个参数是用于获取 redux 的 actionCreators 中的创建动作的方法的<ul>
-<li>dispatch 参数</li>
-<li>return bindActionCreators(动作,dispatch)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="创建-src-service-index-ts-可有可无"><a href="#创建-src-service-index-ts-可有可无" class="headerlink" title="创建 src/service/index.ts(可有可无)"></a>创建 src/service/index.ts(可有可无)</h3><p>写数据请求的</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> fetchHotListReq = <span class="function">(<span class="params">params: &#123; cid: <span class="built_in">number</span> &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    fetch(<span class="string">`http://59.110.226.77:3000/api/list/hot?cid=<span class="subst">$&#123;params.cid&#125;</span>`</span>)</span><br><span class="line">      .then(<span class="function">(<span class="params">data</span>) =&gt;</span> data.json())</span><br><span class="line">      .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        resolve(res);</span><br><span class="line">      &#125;)</span><br><span class="line">      .catch(<span class="function">(<span class="params">error</span>) =&gt;</span> reject(error));</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="创建-src-actions-文件夹"><a href="#创建-src-actions-文件夹" class="headerlink" title="创建 src/actions 文件夹"></a>创建 src/actions 文件夹</h3><ol>
-<li>定义动作对象</li>
-<li>对象里面写函数<ul>
-<li>参数 dispatch 类型 从 redux 引入 Dispatch</li>
-<li>写逻辑</li>
-<li>用 dispatch({type:常量,payload:结果}) 发送给 reducer</li>
-</ul>
-</li>
-<li>导出</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Dispatch &#125; <span class="keyword">from</span> <span class="string">&quot;redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> service <span class="keyword">from</span> <span class="string">&quot;../service&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> hotActions = &#123;</span><br><span class="line">  <span class="function"><span class="title">getHotList</span>(<span class="params">params: &#123; cid: <span class="built_in">number</span> &#125;</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">async</span> (dispatch: Dispatch) =&gt; &#123;</span><br><span class="line">      <span class="keyword">const</span> result = service.fetchHotListReq(params);</span><br><span class="line">      dispatch(&#123;</span><br><span class="line">        <span class="keyword">type</span>: <span class="string">&quot;GET_HOT_LIST&quot;</span>,</span><br><span class="line">        payload: result,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> hotActions;</span><br></pre></td></tr></table></figure>
-
-<h3 id="激活-actions"><a href="#激活-actions" class="headerlink" title="激活 actions"></a>激活 actions</h3><ol>
-<li>回到组件引入 xxActions.ts</li>
-<li>从 redux 引入 bindActionCreators</li>
-<li>写 connect 的第二个回调函数<ul>
-<li>参数为 dispatch</li>
-<li>return bindActionCreators(xxActions, dispatch);</li>
-</ul>
-</li>
-<li>从 props 中调用在这个组件上的方法</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useEffect &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">&quot;react-redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> hotActions <span class="keyword">from</span> <span class="string">&quot;../../actions/hotActions&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; bindActionCreators &#125; <span class="keyword">from</span> <span class="string">&quot;redux&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> P &#123;</span><br><span class="line">  hotList: &#123; [key: <span class="built_in">string</span>]: <span class="built_in">any</span> &#125;;</span><br><span class="line">  getHotList: <span class="function">(<span class="params">params: &#123; cid: <span class="built_in">number</span> &#125;</span>) =&gt;</span> <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Hot</span>(<span class="params">props: P</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; hotList, getHotList &#125; = props;</span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    getHotList(&#123;</span><br><span class="line">      cid: <span class="number">17</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;, []);</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(</span><br><span class="line">  (state: &#123; <span class="attr">hot</span>: &#123;&#125; &#125;) =&gt; &#123;</span><br><span class="line">    <span class="comment">// console.log(state); // state是全局的数据</span></span><br><span class="line">    <span class="keyword">return</span> state.hot;</span><br><span class="line">  &#125;,</span><br><span class="line">  (dispatch) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> bindActionCreators(hotActions, dispatch);</span><br><span class="line">  &#125;</span><br><span class="line">)(Hot);</span><br></pre></td></tr></table></figure>
-
-<h3 id="调用方法后会-dispatch-到-reducer-身上"><a href="#调用方法后会-dispatch-到-reducer-身上" class="headerlink" title="调用方法后会 dispatch 到 reducer 身上"></a>调用方法后会 dispatch 到 reducer 身上</h3><ol>
-<li>console.log(action) 发现有 type 和 payload 属性</li>
-<li>在 reducer 里写 switch 分支判断调用的是哪个方法</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> initState = &#123;</span><br><span class="line">  hotList: [],</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hotReducer = <span class="function">(<span class="params">state = initState, action: <span class="built_in">any</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// console.log(&#x27;action&#x27;,action);</span></span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;GET_HOT_LIST&quot;</span>:</span><br><span class="line">      <span class="keyword">return</span> &#123; <span class="attr">hotList</span>: action.payload.data.content &#125;;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> &#123; ...state &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> hotReducer;</span><br></pre></td></tr></table></figure>
-
-<h3 id="拿到数据后就可以渲染了"><a href="#拿到数据后就可以渲染了" class="headerlink" title="拿到数据后就可以渲染了"></a>拿到数据后就可以渲染了</h3>]]></content>
-      <categories>
-        <category>react</category>
-      </categories>
-      <tags>
-        <tag>react</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>React react-router-dom</title>
     <url>/2021/01/24/react/router/</url>
     <content><![CDATA[<h2 id="React-路由-react-router-dom"><a href="#React-路由-react-router-dom" class="headerlink" title="React 路由 react-router-dom"></a>React 路由 react-router-dom</h2><ol>
@@ -1307,6 +1192,122 @@
 </li>
 </ol>
 ]]></content>
+      <categories>
+        <category>react</category>
+      </categories>
+      <tags>
+        <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React reduex</title>
+    <url>/2021/01/24/react/redux/</url>
+    <content><![CDATA[<h2 id="redux-实现"><a href="#redux-实现" class="headerlink" title="redux 实现"></a>redux 实现</h2><ol>
+<li>安装额外插件</li>
+</ol>
+<blockquote>
+<p>以 redux-xxx 命名的都是 redux 中间件，用于实现特定功能的一个函数</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yarn add redux react-redux redux-thunk</span><br><span class="line"><span class="comment"># redux 构建redux架构</span></span><br><span class="line"><span class="comment"># react-redux 用户数据划分</span></span><br><span class="line"><span class="comment"># redux-thunk 异步数据交互[ 处理前后端交互 ]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="打造-reducer"><a href="#打造-reducer" class="headerlink" title="打造 reducer"></a>打造 reducer</h3><ol>
+<li>src 下创建 reducers/index.ts</li>
+<li>从 redux 引入 combineReducers</li>
+<li>导出 rootReducer</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 打造reducers</span></span><br><span class="line"><span class="keyword">import</span> &#123; combineReducers &#125; <span class="keyword">from</span> <span class="string">&quot;redux&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rootReducer 统一管理项目中的所有reducer</span></span><br><span class="line"><span class="keyword">const</span> rootReducer = combineReducers(&#123;</span><br><span class="line">  <span class="comment">// 数据名: reducer</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> rootReducer;</span><br></pre></td></tr></table></figure>
+
+<h4 id="combineReducers"><a href="#combineReducers" class="headerlink" title="combineReducers"></a>combineReducers</h4><p>用于合并 reducer</p>
+<h3 id="打造-store"><a href="#打造-store" class="headerlink" title="打造 store"></a>打造 store</h3><ol>
+<li>src 下创建 models/index.ts</li>
+<li>从 redux 中引入 createStore, applyMiddleware</li>
+<li>从 redux-thunk 引入 thunk</li>
+<li>引入刚才打造的 rootReducer</li>
+<li>导出</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 用于打造redux构成之一 store</span></span><br><span class="line"><span class="keyword">import</span> &#123; createStore, applyMiddleware &#125; <span class="keyword">from</span> <span class="string">&quot;redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> thunk <span class="keyword">from</span> <span class="string">&quot;redux-thunk&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> rootReducer <span class="keyword">from</span> <span class="string">&quot;../reducers&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// const store = createStore(rootReducer,中间件执行函数)</span></span><br><span class="line"><span class="keyword">const</span> store = createStore(rootReducer, applyMiddleware(thunk));</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store;</span><br></pre></td></tr></table></figure>
+
+<h4 id="createStore-applyMiddleware-thunk"><a href="#createStore-applyMiddleware-thunk" class="headerlink" title="createStore + applyMiddleware + thunk"></a>createStore + applyMiddleware + thunk</h4><figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// createStore(根Reducer,中间件执行函数)</span></span><br><span class="line">createStore(rootReducer, applyMiddleware(thunk));</span><br></pre></td></tr></table></figure>
+
+<h3 id="Provider-跨组件通信"><a href="#Provider-跨组件通信" class="headerlink" title="Provider 跨组件通信"></a>Provider 跨组件通信</h3><blockquote>
+<p>使用跨组件通信的方法将 store 的数据给所有的组件</p>
+</blockquote>
+<ol>
+<li>进入 src 目录的 index.tsx 文件从 react-redux 中引入 Provider</li>
+<li>Provider 有个 store 属性 所以需要引入 store 文件</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// index.tsx</span></span><br><span class="line"><span class="keyword">import</span> &#123; Provider &#125; <span class="keyword">from</span> <span class="string">&quot;react-redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&quot;./models&quot;</span>;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">&lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">  &lt;App /&gt;</span><br><span class="line">&lt;/Provider&gt;;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建-子-reducer"><a href="#创建-子-reducer" class="headerlink" title="创建 子 reducer"></a>创建 子 reducer</h3><ol>
+<li>初始化数据 initState</li>
+<li>定义一个 Reducer 函数<ul>
+<li>参数 state 就是数据</li>
+<li>action 就是一个对象，由 actionCreators 发过来的</li>
+<li>Reducer 一定有返回值，返回一个新的 state</li>
+</ul>
+</li>
+<li>导出</li>
+<li>在 rootReducer 中引入</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> initState = &#123;</span><br><span class="line">  hotList: [],</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hotReducer = <span class="function">(<span class="params">state = initState, action: <span class="built_in">any</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123; ...state &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> hotReducer;</span><br></pre></td></tr></table></figure>
+
+<h3 id="在组件获取数据"><a href="#在组件获取数据" class="headerlink" title="在组件获取数据"></a>在组件获取数据</h3><ol>
+<li>组件需要通过一个叫做【connect 的返回值】的高阶组件来获取 store 中的数据</li>
+<li>通过第一个回调函数的参数 state 获取数据,state 是全部数据，需要 return state.xxx, 并且需要给 state 赋予类型</li>
+<li>组件就可以通过 props 得到数据</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">&quot;react-redux&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> P &#123;</span><br><span class="line">  hotList: &#123; [key: <span class="built_in">string</span>]: <span class="built_in">any</span> &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Hot</span>(<span class="params">props: P</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(<span class="function">(<span class="params">state: &#123; hot: &#123;&#125; &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// console.log(state); // state是全局的数据</span></span><br><span class="line">  <span class="keyword">return</span> state.hot;</span><br><span class="line">&#125;)(Hot);</span><br></pre></td></tr></table></figure>
+
+<h4 id="connect-bindActionCreators"><a href="#connect-bindActionCreators" class="headerlink" title="connect + bindActionCreators"></a>connect + bindActionCreators</h4><ol>
+<li>connect(callback1,callback2)(组件) 有两个回掉函数<ul>
+<li>第一个参数用于获取 store 的 state<ul>
+<li>state 参数</li>
+<li>return state.xxx</li>
+</ul>
+</li>
+<li>第二个参数是用于获取 redux 的 actionCreators 中的创建动作的方法的<ul>
+<li>dispatch 参数</li>
+<li>return bindActionCreators(动作,dispatch)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="打造接口-service"><a href="#打造接口-service" class="headerlink" title="打造接口 service"></a>打造接口 service</h3><p>创建 src/service/index.ts</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> fetchHotListReq = <span class="function">(<span class="params">params: &#123; cid: <span class="built_in">number</span> &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    fetch(<span class="string">`http://59.110.226.77:3000/api/list/hot?cid=<span class="subst">$&#123;params.cid&#125;</span>`</span>)</span><br><span class="line">      .then(<span class="function">(<span class="params">data</span>) =&gt;</span> data.json())</span><br><span class="line">      .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        resolve(res);</span><br><span class="line">      &#125;)</span><br><span class="line">      .catch(<span class="function">(<span class="params">error</span>) =&gt;</span> reject(error));</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="打造-actions"><a href="#打造-actions" class="headerlink" title="打造 actions"></a>打造 actions</h3><ol>
+<li>创建 src/actions 文件夹</li>
+<li>定义动作对象</li>
+<li>对象里面写函数<ul>
+<li>参数 dispatch 类型 从 redux 引入 Dispatch</li>
+<li>写逻辑</li>
+<li>用 dispatch({type:常量,payload:结果}) 发送给 reducer</li>
+</ul>
+</li>
+<li>导出</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Dispatch &#125; <span class="keyword">from</span> <span class="string">&quot;redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> service <span class="keyword">from</span> <span class="string">&quot;../service&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> hotActions = &#123;</span><br><span class="line">  <span class="function"><span class="title">getHotList</span>(<span class="params">params: &#123; cid: <span class="built_in">number</span> &#125;</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">async</span> (dispatch: Dispatch) =&gt; &#123;</span><br><span class="line">      <span class="keyword">const</span> result = service.fetchHotListReq(params);</span><br><span class="line">      dispatch(&#123;</span><br><span class="line">        <span class="keyword">type</span>: <span class="string">&quot;GET_HOT_LIST&quot;</span>,</span><br><span class="line">        payload: result,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> hotActions;</span><br></pre></td></tr></table></figure>
+
+<h3 id="激活-actions"><a href="#激活-actions" class="headerlink" title="激活 actions"></a>激活 actions</h3><ol>
+<li>回到组件引入 xxActions.ts</li>
+<li>从 redux 引入 bindActionCreators</li>
+<li>写 connect 的第二个回调函数<ul>
+<li>参数为 dispatch</li>
+<li>return bindActionCreators(xxActions, dispatch);</li>
+</ul>
+</li>
+<li>从 props 中调用在这个组件上的方法</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useEffect &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">&quot;react-redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> hotActions <span class="keyword">from</span> <span class="string">&quot;../../actions/hotActions&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; bindActionCreators &#125; <span class="keyword">from</span> <span class="string">&quot;redux&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> P &#123;</span><br><span class="line">  hotList: &#123; [key: <span class="built_in">string</span>]: <span class="built_in">any</span> &#125;;</span><br><span class="line">  getHotList: <span class="function">(<span class="params">params: &#123; cid: <span class="built_in">number</span> &#125;</span>) =&gt;</span> <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Hot</span>(<span class="params">props: P</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; hotList, getHotList &#125; = props;</span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    getHotList(&#123;</span><br><span class="line">      cid: <span class="number">17</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;, []);</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(</span><br><span class="line">  (state: &#123; <span class="attr">hot</span>: &#123;&#125; &#125;) =&gt; &#123;</span><br><span class="line">    <span class="comment">// console.log(state); // state是全局的数据</span></span><br><span class="line">    <span class="keyword">return</span> state.hot;</span><br><span class="line">  &#125;,</span><br><span class="line">  (dispatch) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> bindActionCreators(hotActions, dispatch);</span><br><span class="line">  &#125;</span><br><span class="line">)(Hot);</span><br></pre></td></tr></table></figure>
+
+<h3 id="调用方法后会-dispatch-到-reducer-身上"><a href="#调用方法后会-dispatch-到-reducer-身上" class="headerlink" title="调用方法后会 dispatch 到 reducer 身上"></a>调用方法后会 dispatch 到 reducer 身上</h3><ol>
+<li>console.log(action) 发现有 type 和 payload 属性</li>
+<li>在 reducer 里写 switch 分支判断调用的是哪个方法</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> initState = &#123;</span><br><span class="line">  hotList: [],</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hotReducer = <span class="function">(<span class="params">state = initState, action: <span class="built_in">any</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// console.log(&#x27;action&#x27;,action);</span></span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;GET_HOT_LIST&quot;</span>:</span><br><span class="line">      <span class="keyword">return</span> &#123; <span class="attr">hotList</span>: action.payload.data.content &#125;;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> &#123; ...state &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> hotReducer;</span><br></pre></td></tr></table></figure>
+
+<h3 id="拿到数据后就可以渲染了"><a href="#拿到数据后就可以渲染了" class="headerlink" title="拿到数据后就可以渲染了"></a>拿到数据后就可以渲染了</h3>]]></content>
       <categories>
         <category>react</category>
       </categories>
@@ -1490,112 +1491,6 @@
 <li>每次修改项目配置文件，项目需要重启才能生效</li>
 </ol>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// vue.config.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    lintOnsave: <span class="literal">false</span>,</span><br><span class="line">    devServer: &#123;</span><br><span class="line">        overlay: &#123; <span class="comment">// eslint 关闭</span></span><br><span class="line">            warnings: <span class="literal">false</span>,</span><br><span class="line">            errors: <span class="literal">false</span></span><br><span class="line">        &#125;,</span><br><span class="line">        port: <span class="number">9000</span>, <span class="comment">// 服务器端口修改</span></span><br><span class="line">        proxy: &#123; <span class="comment">// 反向代理</span></span><br><span class="line">            <span class="comment">// 标识符: 反向代理的配置选项</span></span><br><span class="line">            <span class="comment">// 标识符我们选择接口中统一存在的路径，一般基本上都是域名后的第一个路径</span></span><br><span class="line">            <span class="comment">// 例如请求https://m.maoyan.com/ajax/movieOnInfoList </span></span><br><span class="line">            <span class="string">&#x27;/ajax&#x27;</span>: &#123;</span><br><span class="line">                target: <span class="string">&#x27;https://m.maoyan.com&#x27;</span>, <span class="comment">// 目标源</span></span><br><span class="line">                changeOrigin: <span class="literal">true</span>, <span class="comment">// 使用我们的源</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>vue3</category>
-      </categories>
-      <tags>
-        <tag>vue3</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue3 组件通信</title>
-    <url>/2020/12/04/vue3/tongxin/</url>
-    <content><![CDATA[<h2 id="Vue组件通信"><a href="#Vue组件通信" class="headerlink" title="Vue组件通信"></a>Vue组件通信</h2><ol>
-<li>父-&gt;子</li>
-<li>子-&gt;父</li>
-<li>非父子</li>
-<li>跨组件通信</li>
-</ol>
-<h3 id="父子组件通信"><a href="#父子组件通信" class="headerlink" title="父子组件通信"></a>父子组件通信</h3><ol>
-<li>父组件传递给子组件money数据</li>
-<li>html: 父组件中的子组件绑定自定义属性 :money=”money”</li>
-<li>js: 子组件用props属性接收</li>
-<li>html: 子组件就可以使用父组件的money数据</li>
-</ol>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Father</span>&gt;</span><span class="tag">&lt;/<span class="name">Father</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;father&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Son</span> <span class="attr">:money</span>=<span class="string">&quot;money&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Son</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        son &#123;&#123; money &#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.createApp(&#123;&#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Father&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#father&#x27;</span>,</span><br><span class="line">        <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                money: <span class="number">2000</span>,</span><br><span class="line">                phone: <span class="number">13</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Son&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#son&#x27;</span>,</span><br><span class="line">        props: [<span class="string">&#x27;money&#x27;</span>]</span><br><span class="line">    &#125;)</span><br><span class="line">    .mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>tips: 属性校验</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// props用法</span></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">props: [&#x27;money&#x27;] // 只接收不校验</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">props: &#123;</span></span><br><span class="line"><span class="comment">    money: Number // 表示我接收到的数据必须是一个Number类型</span></span><br><span class="line"><span class="comment">&#125; </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.</span></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">props: &#123;</span></span><br><span class="line"><span class="comment">    money: &#123;</span></span><br><span class="line"><span class="comment">        validator(val) &#123; // 校验函数, validator这个名称是死的</span></span><br><span class="line"><span class="comment">            if (val &lt; 3000) alert(&#x27;钱太少了&#x27;)</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="子父组件通信"><a href="#子父组件通信" class="headerlink" title="子父组件通信"></a>子父组件通信</h3><ol>
-<li>子组件传递给父组件数据，父组件来接收</li>
-<li>html: 父组件中的子组件使用自定义事件【事件名自定义】形式(@get=”setXjk”)，讲父组件方法传递给子组件</li>
-<li>js: 子组件设置一个方法(give)执行父组件传递过来的那个自定义事件 </li>
-<li>Vue提供了一个 $emit // this.$emit(自定义事件名称,参数)</li>
-<li>html: 给子组件按钮绑定这个方法(@click=”give”)</li>
-</ol>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Father</span>&gt;</span><span class="tag">&lt;/<span class="name">Father</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;father&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Son</span> @<span class="attr">get</span>=<span class="string">&quot;setXjk&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Son</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span> &#123;&#123; xjk  &#125;&#125; <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;give&quot;</span>&gt;</span>发红包<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.createApp(&#123;&#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Father&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#father&#x27;</span>,</span><br><span class="line">        <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                xjk: <span class="number">500</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            <span class="function"><span class="title">setXjk</span>(<span class="params">hongBao</span>)</span> &#123;</span><br><span class="line">                <span class="built_in">this</span>.xjk += hongBao</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Son&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#son&#x27;</span>,</span><br><span class="line">        <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                hongBao: <span class="number">8888</span>,</span><br><span class="line">                count: <span class="number">1</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            <span class="function"><span class="title">give</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">                <span class="comment">// 执行父组件传递过来的那个自定义事件 </span></span><br><span class="line">                <span class="comment">// Vue提供了一个  $emit  </span></span><br><span class="line">                <span class="comment">// this.$emit(自定义事件名称,参数)</span></span><br><span class="line">                <span class="keyword">if</span> (<span class="built_in">this</span>.count &gt; <span class="number">1</span>) &#123;</span><br><span class="line">                    alert(<span class="string">&#x27;只执行一次，没钱了&#x27;</span>)</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">this</span>.$emit(<span class="string">&#x27;get&#x27;</span>, <span class="built_in">this</span>.hongBao)</span><br><span class="line">                <span class="built_in">this</span>.count++</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="非父子组件通信"><a href="#非父子组件通信" class="headerlink" title="非父子组件通信"></a>非父子组件通信</h3><ol>
-<li>案例: 姐姐揍弟弟，弟弟哭</li>
-<li>弟弟有一个数据cryFlag和方法setCryFlag</li>
-<li>姐姐想要使用弟弟的方法来控制弟弟给的数据</li>
-<li>通过共同的父组件，其中父组件的son组件中打一个ref标记，用于父组件获取son组件的方法(ref=”son”)</li>
-<li>父组件设置一个kick方法 里面的this.$refs包含son组件的方法(console.log(this.$refs))</li>
-<li>父组件的sister组件中绑定自定义属性 :kick=”kick”, sister组件通过props接收</li>
-</ol>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Father</span>&gt;</span><span class="tag">&lt;/<span class="name">Father</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;father&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Sister</span> <span class="attr">:kick</span>=<span class="string">&quot;kick&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Sister</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Son</span> <span class="attr">ref</span>=<span class="string">&quot;son&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Son</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">&quot;cryFlag&quot;</span>&gt;</span> 呜呜呜 <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;sister&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;kick&quot;</span>&gt;</span>揍弟弟<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.createApp(&#123;&#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Father&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#father&#x27;</span>,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            <span class="function"><span class="title">kick</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">                <span class="comment">// console.log(this.$refs);</span></span><br><span class="line">                <span class="built_in">this</span>.$refs.son.setCryFlag()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Son&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#son&#x27;</span>,</span><br><span class="line">        <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                cryFlag: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            <span class="function"><span class="title">setCryFlag</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">                <span class="built_in">this</span>.cryFlag = !<span class="built_in">this</span>.cryFlag</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Sister&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#sister&#x27;</span>,</span><br><span class="line">        props: [<span class="string">&#x27;kick&#x27;</span>]</span><br><span class="line">    &#125;)</span><br><span class="line">    .mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="跨组件通信"><a href="#跨组件通信" class="headerlink" title="跨组件通信"></a>跨组件通信</h3><ol>
-<li>父组件里面有个属性 provide，在里面写数据</li>
-<li>子孙组件有个属性 inject ，注入上面给的数据</li>
-</ol>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Hello</span>&gt;</span><span class="tag">&lt;/<span class="name">Hello</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;hello&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Father</span>&gt;</span><span class="tag">&lt;/<span class="name">Father</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;father&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Son</span>&gt;</span><span class="tag">&lt;/<span class="name">Son</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">grand-son</span>&gt;</span><span class="tag">&lt;/<span class="name">grand-son</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;grand-son&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        &#123;&#123; money &#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.createApp(&#123;&#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Hello&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#hello&#x27;</span>,</span><br><span class="line">        provide: &#123;</span><br><span class="line">            money: <span class="number">10000</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Father&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#father&#x27;</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Son&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#son&#x27;</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .component(<span class="string">&#x27;grand-son&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#grand-son&#x27;</span>,</span><br><span class="line">        inject: [<span class="string">&#x27;money&#x27;</span>], <span class="comment">// 注入</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>vue3</category>
-      </categories>
-      <tags>
-        <tag>vue3</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue3 vuex</title>
-    <url>/2020/12/15/vue3/vuex/</url>
-    <content><![CDATA[<h2 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h2><blockquote>
-<p>vuex是vue项目的状态[数据]管理工具，用于获取、存储、操作数据</p>
-</blockquote>
-<h3 id="vuex构成部分"><a href="#vuex构成部分" class="headerlink" title="vuex构成部分"></a>vuex构成部分</h3><pre><code>1. state 状态
-2. actions 动作
-3. mutations 动作的下一步，用于修改数据
-4. getters 几乎不使用
-</code></pre>
-<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ol>
-<li>安装 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add vuex@next</span><br></pre></td></tr></table></figure></li>
-<li>在src目录下建立store文件夹再创建index.ts</li>
-<li>注册store<br> src/main.ts中 use(store)</li>
-<li>单独数据块<br> 在store文件夹下创建<ol>
-<li>namespaced</li>
-<li>state</li>
-<li>actions</li>
-<li>mutations</li>
-</ol>
-</li>
-<li>src/App.vue<ol>
-<li>引入并实例化</li>
-<li>获得数据用计算属性，使用方法store.dispatch({type,data})</li>
-</ol>
-</li>
-</ol>
-<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><ol>
-<li><p>store的入口文件</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"><span class="keyword">import</span> homeStore <span class="keyword">from</span> <span class="string">&#x27;./homeStore&#x27;</span> <span class="comment">// 接下来创建homeStore这个数据块</span></span><br></pre></td></tr></table></figure></li>
-<li><p>数据块</p>
-<blockquote>
-<p>在store文件夹下创建homeStore.ts</p>
-</blockquote>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> homeStore = &#123;</span><br><span class="line">    namespaced: <span class="literal">true</span>, <span class="comment">// 是否使用命名空间，如果使用的话调用数据前加上仓库名</span></span><br><span class="line">        <span class="comment">// 例:   homeStore/getList</span></span><br><span class="line">    state: &#123; <span class="comment">// 用于存放数据</span></span><br><span class="line">        <span class="comment">// 数据</span></span><br><span class="line">        list: []</span><br><span class="line">    &#125;,</span><br><span class="line">    actions: &#123; <span class="comment">// 给组件提供方法调用</span></span><br><span class="line">        <span class="comment">// 例:</span></span><br><span class="line">        <span class="keyword">async</span> <span class="function"><span class="title">getList</span>(<span class="params">&#123;commit&#125;,&#123;val&#125;</span>)</span>&#123; </span><br><span class="line">            <span class="comment">// commit为仓库里解构出来的方法，用于将action发送给mutations</span></span><br><span class="line">            <span class="comment">// val为前端组件store.dispatch(&#123;type,data&#125;)的data中解构出来的 </span></span><br><span class="line">            <span class="comment">// 内部书写逻辑</span></span><br><span class="line">            <span class="keyword">const</span> r = <span class="keyword">await</span> api.abcdReq(); <span class="comment">// 假设发个请求</span></span><br><span class="line">            <span class="keyword">if</span>(r) &#123;</span><br><span class="line">                commit(&#123;</span><br><span class="line">                    <span class="keyword">type</span>: <span class="string">&#x27;GET_LIST&#x27;</span>, <span class="comment">// type 书写常量，也是下面mutations中方法的调用名</span></span><br><span class="line">                    payload: r.data <span class="comment">// data随意书写的，主要将r接收来的数据放在负载的payload中</span></span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;，</span><br><span class="line">    mutations: &#123;</span><br><span class="line">        <span class="function"><span class="title">GET_LIST</span>(<span class="params">state, &#123; payload &#125;</span>)</span> &#123; </span><br><span class="line">            <span class="comment">// state 为该仓库中的state数据</span></span><br><span class="line">            <span class="comment">// &#123; payload &#125;为上面actions中传递下来的payload并解构</span></span><br><span class="line">            state.list = payload <span class="comment">// 将仓库数据的list修改为payload负载中的值</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> homeStore;</span><br></pre></td></tr></table></figure></li>
-<li><p>App.vue</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span> <span class="comment">// 引入</span></span><br><span class="line"><span class="keyword">const</span> store = useStore()  <span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">const</span> list = computed(<span class="function">()=&gt;</span>store.state.homeStore.list) <span class="comment">// 计算属性获取方法</span></span><br><span class="line">onMounted(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    store.dispatch(&#123;</span><br><span class="line">        type: <span class="string">&#x27;homeStore/getlist&#x27;</span>, <span class="comment">// 如果没用命名空间则不需要homeStore 但不利于管理</span></span><br><span class="line">        val: <span class="string">&#x27;asda&#x27;</span> <span class="comment">// val可以取名</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="comment">//.... 记得return 如果用了script标签setup语法糖则不需要</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-]]></content>
       <categories>
         <category>vue3</category>
       </categories>
@@ -1801,6 +1696,112 @@
 <li><a href="https://www.fastmock.site/#/">fastmock</a></li>
 </ul>
 </li>
+</ol>
+]]></content>
+      <categories>
+        <category>vue3</category>
+      </categories>
+      <tags>
+        <tag>vue3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue3 组件通信</title>
+    <url>/2020/12/04/vue3/tongxin/</url>
+    <content><![CDATA[<h2 id="Vue组件通信"><a href="#Vue组件通信" class="headerlink" title="Vue组件通信"></a>Vue组件通信</h2><ol>
+<li>父-&gt;子</li>
+<li>子-&gt;父</li>
+<li>非父子</li>
+<li>跨组件通信</li>
+</ol>
+<h3 id="父子组件通信"><a href="#父子组件通信" class="headerlink" title="父子组件通信"></a>父子组件通信</h3><ol>
+<li>父组件传递给子组件money数据</li>
+<li>html: 父组件中的子组件绑定自定义属性 :money=”money”</li>
+<li>js: 子组件用props属性接收</li>
+<li>html: 子组件就可以使用父组件的money数据</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Father</span>&gt;</span><span class="tag">&lt;/<span class="name">Father</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;father&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Son</span> <span class="attr">:money</span>=<span class="string">&quot;money&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Son</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        son &#123;&#123; money &#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.createApp(&#123;&#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Father&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#father&#x27;</span>,</span><br><span class="line">        <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                money: <span class="number">2000</span>,</span><br><span class="line">                phone: <span class="number">13</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Son&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#son&#x27;</span>,</span><br><span class="line">        props: [<span class="string">&#x27;money&#x27;</span>]</span><br><span class="line">    &#125;)</span><br><span class="line">    .mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>tips: 属性校验</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// props用法</span></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">props: [&#x27;money&#x27;] // 只接收不校验</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">props: &#123;</span></span><br><span class="line"><span class="comment">    money: Number // 表示我接收到的数据必须是一个Number类型</span></span><br><span class="line"><span class="comment">&#125; </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.</span></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">props: &#123;</span></span><br><span class="line"><span class="comment">    money: &#123;</span></span><br><span class="line"><span class="comment">        validator(val) &#123; // 校验函数, validator这个名称是死的</span></span><br><span class="line"><span class="comment">            if (val &lt; 3000) alert(&#x27;钱太少了&#x27;)</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="子父组件通信"><a href="#子父组件通信" class="headerlink" title="子父组件通信"></a>子父组件通信</h3><ol>
+<li>子组件传递给父组件数据，父组件来接收</li>
+<li>html: 父组件中的子组件使用自定义事件【事件名自定义】形式(@get=”setXjk”)，讲父组件方法传递给子组件</li>
+<li>js: 子组件设置一个方法(give)执行父组件传递过来的那个自定义事件 </li>
+<li>Vue提供了一个 $emit // this.$emit(自定义事件名称,参数)</li>
+<li>html: 给子组件按钮绑定这个方法(@click=”give”)</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Father</span>&gt;</span><span class="tag">&lt;/<span class="name">Father</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;father&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Son</span> @<span class="attr">get</span>=<span class="string">&quot;setXjk&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Son</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span> &#123;&#123; xjk  &#125;&#125; <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;give&quot;</span>&gt;</span>发红包<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.createApp(&#123;&#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Father&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#father&#x27;</span>,</span><br><span class="line">        <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                xjk: <span class="number">500</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            <span class="function"><span class="title">setXjk</span>(<span class="params">hongBao</span>)</span> &#123;</span><br><span class="line">                <span class="built_in">this</span>.xjk += hongBao</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Son&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#son&#x27;</span>,</span><br><span class="line">        <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                hongBao: <span class="number">8888</span>,</span><br><span class="line">                count: <span class="number">1</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            <span class="function"><span class="title">give</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">                <span class="comment">// 执行父组件传递过来的那个自定义事件 </span></span><br><span class="line">                <span class="comment">// Vue提供了一个  $emit  </span></span><br><span class="line">                <span class="comment">// this.$emit(自定义事件名称,参数)</span></span><br><span class="line">                <span class="keyword">if</span> (<span class="built_in">this</span>.count &gt; <span class="number">1</span>) &#123;</span><br><span class="line">                    alert(<span class="string">&#x27;只执行一次，没钱了&#x27;</span>)</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">this</span>.$emit(<span class="string">&#x27;get&#x27;</span>, <span class="built_in">this</span>.hongBao)</span><br><span class="line">                <span class="built_in">this</span>.count++</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="非父子组件通信"><a href="#非父子组件通信" class="headerlink" title="非父子组件通信"></a>非父子组件通信</h3><ol>
+<li>案例: 姐姐揍弟弟，弟弟哭</li>
+<li>弟弟有一个数据cryFlag和方法setCryFlag</li>
+<li>姐姐想要使用弟弟的方法来控制弟弟给的数据</li>
+<li>通过共同的父组件，其中父组件的son组件中打一个ref标记，用于父组件获取son组件的方法(ref=”son”)</li>
+<li>父组件设置一个kick方法 里面的this.$refs包含son组件的方法(console.log(this.$refs))</li>
+<li>父组件的sister组件中绑定自定义属性 :kick=”kick”, sister组件通过props接收</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Father</span>&gt;</span><span class="tag">&lt;/<span class="name">Father</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;father&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Sister</span> <span class="attr">:kick</span>=<span class="string">&quot;kick&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Sister</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Son</span> <span class="attr">ref</span>=<span class="string">&quot;son&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Son</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">&quot;cryFlag&quot;</span>&gt;</span> 呜呜呜 <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;sister&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;kick&quot;</span>&gt;</span>揍弟弟<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.createApp(&#123;&#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Father&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#father&#x27;</span>,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            <span class="function"><span class="title">kick</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">                <span class="comment">// console.log(this.$refs);</span></span><br><span class="line">                <span class="built_in">this</span>.$refs.son.setCryFlag()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Son&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#son&#x27;</span>,</span><br><span class="line">        <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                cryFlag: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            <span class="function"><span class="title">setCryFlag</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">                <span class="built_in">this</span>.cryFlag = !<span class="built_in">this</span>.cryFlag</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Sister&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#sister&#x27;</span>,</span><br><span class="line">        props: [<span class="string">&#x27;kick&#x27;</span>]</span><br><span class="line">    &#125;)</span><br><span class="line">    .mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="跨组件通信"><a href="#跨组件通信" class="headerlink" title="跨组件通信"></a>跨组件通信</h3><ol>
+<li>父组件里面有个属性 provide，在里面写数据</li>
+<li>子孙组件有个属性 inject ，注入上面给的数据</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Hello</span>&gt;</span><span class="tag">&lt;/<span class="name">Hello</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;hello&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Father</span>&gt;</span><span class="tag">&lt;/<span class="name">Father</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;father&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Son</span>&gt;</span><span class="tag">&lt;/<span class="name">Son</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">grand-son</span>&gt;</span><span class="tag">&lt;/<span class="name">grand-son</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;grand-son&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        &#123;&#123; money &#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.createApp(&#123;&#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Hello&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#hello&#x27;</span>,</span><br><span class="line">        provide: &#123;</span><br><span class="line">            money: <span class="number">10000</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Father&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#father&#x27;</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .component(<span class="string">&#x27;Son&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#son&#x27;</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .component(<span class="string">&#x27;grand-son&#x27;</span>, &#123;</span><br><span class="line">        template: <span class="string">&#x27;#grand-son&#x27;</span>,</span><br><span class="line">        inject: [<span class="string">&#x27;money&#x27;</span>], <span class="comment">// 注入</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>vue3</category>
+      </categories>
+      <tags>
+        <tag>vue3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue3 vuex</title>
+    <url>/2020/12/15/vue3/vuex/</url>
+    <content><![CDATA[<h2 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h2><blockquote>
+<p>vuex是vue项目的状态[数据]管理工具，用于获取、存储、操作数据</p>
+</blockquote>
+<h3 id="vuex构成部分"><a href="#vuex构成部分" class="headerlink" title="vuex构成部分"></a>vuex构成部分</h3><pre><code>1. state 状态
+2. actions 动作
+3. mutations 动作的下一步，用于修改数据
+4. getters 几乎不使用
+</code></pre>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ol>
+<li>安装 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add vuex@next</span><br></pre></td></tr></table></figure></li>
+<li>在src目录下建立store文件夹再创建index.ts</li>
+<li>注册store<br> src/main.ts中 use(store)</li>
+<li>单独数据块<br> 在store文件夹下创建<ol>
+<li>namespaced</li>
+<li>state</li>
+<li>actions</li>
+<li>mutations</li>
+</ol>
+</li>
+<li>src/App.vue<ol>
+<li>引入并实例化</li>
+<li>获得数据用计算属性，使用方法store.dispatch({type,data})</li>
+</ol>
+</li>
+</ol>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><ol>
+<li><p>store的入口文件</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"><span class="keyword">import</span> homeStore <span class="keyword">from</span> <span class="string">&#x27;./homeStore&#x27;</span> <span class="comment">// 接下来创建homeStore这个数据块</span></span><br></pre></td></tr></table></figure></li>
+<li><p>数据块</p>
+<blockquote>
+<p>在store文件夹下创建homeStore.ts</p>
+</blockquote>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> homeStore = &#123;</span><br><span class="line">    namespaced: <span class="literal">true</span>, <span class="comment">// 是否使用命名空间，如果使用的话调用数据前加上仓库名</span></span><br><span class="line">        <span class="comment">// 例:   homeStore/getList</span></span><br><span class="line">    state: &#123; <span class="comment">// 用于存放数据</span></span><br><span class="line">        <span class="comment">// 数据</span></span><br><span class="line">        list: []</span><br><span class="line">    &#125;,</span><br><span class="line">    actions: &#123; <span class="comment">// 给组件提供方法调用</span></span><br><span class="line">        <span class="comment">// 例:</span></span><br><span class="line">        <span class="keyword">async</span> <span class="function"><span class="title">getList</span>(<span class="params">&#123;commit&#125;,&#123;val&#125;</span>)</span>&#123; </span><br><span class="line">            <span class="comment">// commit为仓库里解构出来的方法，用于将action发送给mutations</span></span><br><span class="line">            <span class="comment">// val为前端组件store.dispatch(&#123;type,data&#125;)的data中解构出来的 </span></span><br><span class="line">            <span class="comment">// 内部书写逻辑</span></span><br><span class="line">            <span class="keyword">const</span> r = <span class="keyword">await</span> api.abcdReq(); <span class="comment">// 假设发个请求</span></span><br><span class="line">            <span class="keyword">if</span>(r) &#123;</span><br><span class="line">                commit(&#123;</span><br><span class="line">                    <span class="keyword">type</span>: <span class="string">&#x27;GET_LIST&#x27;</span>, <span class="comment">// type 书写常量，也是下面mutations中方法的调用名</span></span><br><span class="line">                    payload: r.data <span class="comment">// data随意书写的，主要将r接收来的数据放在负载的payload中</span></span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;，</span><br><span class="line">    mutations: &#123;</span><br><span class="line">        <span class="function"><span class="title">GET_LIST</span>(<span class="params">state, &#123; payload &#125;</span>)</span> &#123; </span><br><span class="line">            <span class="comment">// state 为该仓库中的state数据</span></span><br><span class="line">            <span class="comment">// &#123; payload &#125;为上面actions中传递下来的payload并解构</span></span><br><span class="line">            state.list = payload <span class="comment">// 将仓库数据的list修改为payload负载中的值</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> homeStore;</span><br></pre></td></tr></table></figure></li>
+<li><p>App.vue</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span> <span class="comment">// 引入</span></span><br><span class="line"><span class="keyword">const</span> store = useStore()  <span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">const</span> list = computed(<span class="function">()=&gt;</span>store.state.homeStore.list) <span class="comment">// 计算属性获取方法</span></span><br><span class="line">onMounted(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    store.dispatch(&#123;</span><br><span class="line">        type: <span class="string">&#x27;homeStore/getlist&#x27;</span>, <span class="comment">// 如果没用命名空间则不需要homeStore 但不利于管理</span></span><br><span class="line">        val: <span class="string">&#x27;asda&#x27;</span> <span class="comment">// val可以取名</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="comment">//.... 记得return 如果用了script标签setup语法糖则不需要</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
 ]]></content>
       <categories>
@@ -2585,8 +2586,8 @@
         <category>面试题</category>
       </categories>
       <tags>
-        <tag>js</tag>
         <tag>css</tag>
+        <tag>js</tag>
       </tags>
   </entry>
 </search>
