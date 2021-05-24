@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>npm xlsx - Mr.Chen</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="cheerless,"> 
+    <meta name="description" content="xlsx
+可以在前端中使用 js 导出 excel
+
+打造函数
+这里参考网上的
+
+1234567891011121314151617181920212223242526272829303132333,"> 
+    <meta name="author" content="Xiao Suan"> 
+    <link rel="alternative" href="atom.xml" title="Mr.Chen" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Mr.Chen</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://cheerless.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">npm xlsx</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">npm xlsx</h1>
+        <div class="stuff">
+            <span>二月 02, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/js-nodejs/" rel="tag">js nodejs</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="xlsx"><a href="#xlsx" class="headerlink" title="xlsx"></a>xlsx</h2><blockquote>
+<p>可以在前端中使用 js 导出 excel</p>
+</blockquote>
+<h3 id="打造函数"><a href="#打造函数" class="headerlink" title="打造函数"></a>打造函数</h3><blockquote>
+<p>这里参考网上的</p>
+</blockquote>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> XLSX <span class="keyword">from</span> <span class="string">&quot;xlsx&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">sheet2blob</span>(<span class="params">sheet: <span class="built_in">any</span>, sheetName?: <span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">  sheetName = sheetName || <span class="string">&quot;sheet1&quot;</span>;</span><br><span class="line">  <span class="keyword">var</span> workbook: <span class="built_in">any</span> = &#123;</span><br><span class="line">    SheetNames: [sheetName],</span><br><span class="line">    Sheets: &#123;&#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">  workbook.Sheets[sheetName] = sheet; <span class="comment">// 生成excel的配置项</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> wopts: <span class="built_in">any</span> = &#123;</span><br><span class="line">    bookType: <span class="string">&quot;xlsx&quot;</span>, <span class="comment">// 要生成的文件类型</span></span><br><span class="line">    bookSST: <span class="literal">false</span>, <span class="comment">// 是否生成Shared String Table，官方解释是，如果开启生成速度会下降，但在低版本IOS设备上有更好的兼容性</span></span><br><span class="line">    <span class="keyword">type</span>: <span class="string">&quot;binary&quot;</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">var</span> wbout = XLSX.write(workbook, wopts);</span><br><span class="line">  <span class="keyword">var</span> blob = <span class="keyword">new</span> Blob([s2ab(wbout)], &#123;</span><br><span class="line">    <span class="keyword">type</span>: <span class="string">&quot;application/octet-stream&quot;</span>,</span><br><span class="line">  &#125;); <span class="comment">// 字符串转ArrayBuffer</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">s2ab</span>(<span class="params">s: <span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> buf = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(s.length);</span><br><span class="line">    <span class="keyword">var</span> view = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(buf);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i != s.length; ++i) view[i] = s.charCodeAt(i) &amp; <span class="number">0xff</span>;</span><br><span class="line">    <span class="keyword">return</span> buf;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> blob;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">openDownloadDialog</span>(<span class="params">url: <span class="built_in">any</span>, saveName: <span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> url == <span class="string">&quot;object&quot;</span> &amp;&amp; url <span class="keyword">instanceof</span> Blob) &#123;</span><br><span class="line">    url = URL.createObjectURL(url); <span class="comment">// 创建blob地址</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> aLink = <span class="built_in">document</span>.createElement(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">  aLink.href = url;</span><br><span class="line">  aLink.download = saveName || <span class="string">&quot;&quot;</span>; <span class="comment">// HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效</span></span><br><span class="line">  <span class="keyword">var</span> event;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">window</span>.MouseEvent) event = <span class="keyword">new</span> MouseEvent(<span class="string">&quot;click&quot;</span>);</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    event = <span class="built_in">document</span>.createEvent(<span class="string">&quot;MouseEvents&quot;</span>);</span><br><span class="line">    event.initMouseEvent(</span><br><span class="line">      <span class="string">&quot;click&quot;</span>,</span><br><span class="line">      <span class="literal">true</span>,</span><br><span class="line">      <span class="literal">false</span>,</span><br><span class="line">      <span class="built_in">window</span>,</span><br><span class="line">      <span class="number">0</span>,</span><br><span class="line">      <span class="number">0</span>,</span><br><span class="line">      <span class="number">0</span>,</span><br><span class="line">      <span class="number">0</span>,</span><br><span class="line">      <span class="number">0</span>,</span><br><span class="line">      <span class="literal">false</span>,</span><br><span class="line">      <span class="literal">false</span>,</span><br><span class="line">      <span class="literal">false</span>,</span><br><span class="line">      <span class="literal">false</span>,</span><br><span class="line">      <span class="number">0</span>,</span><br><span class="line">      <span class="literal">null</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  aLink.dispatchEvent(event);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="绑定事件"><a href="#绑定事件" class="headerlink" title="绑定事件"></a>绑定事件</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">btn_export</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//   var sheet = XLSX.utils.table_to_sheet(table1); //将一个table对换成一个sheet对象</span></span><br><span class="line">  <span class="keyword">var</span> sheet = XLSX.utils.json_to_sheet(table1); <span class="comment">//将一个json对换成一个sheet对象</span></span><br><span class="line">  openDownloadDialog(sheet2blob(sheet), <span class="string">&quot;下载.xlsx&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="http://domain.com/awesome.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#xlsx"><span class="toc-number">1.</span> <span class="toc-text">xlsx</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">打造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text">绑定事件</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
